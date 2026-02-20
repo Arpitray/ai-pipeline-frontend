@@ -85,6 +85,7 @@ export function AddProductForm() {
     e.preventDefault();
     if (!imageFile) {
       setError("Please upload a product image.");
+      window.scrollTo(0, 0);
       return;
     }
     setError(null);
@@ -130,137 +131,191 @@ export function AddProductForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Image Upload */}
-      <ImageUpload onFileChange={setImageFile} />
-
-      {/* Title */}
-      <Input
-        id="title"
-        name="title"
-        label="Title"
-        type="text"
-        placeholder="e.g. Gold Necklace"
-        value={form.title}
-        onChange={(e) => setField("title", e.target.value)}
-        required
-      />
-      {/* Dropdowns row 1 */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Select
-          id="jewellery_type"
-          label="Jewellery type"
-          options={JEWELLERY_TYPES}
-          value={form.jewellery_type}
-          onChange={(e) => setField("jewellery_type", e.target.value)}
-        />
-        <Select
-          id="category"
-          label="Category"
-          options={CATEGORIES}
-          value={form.category}
-          onChange={(e) => setField("category", e.target.value)}
-        />
+    <div className="max-w-4xl mx-auto bg-white border border-slate-200 shadow-sm rounded-xl overflow-hidden">
+      
+      <div className="border-b border-slate-100 bg-slate-50/50 px-8 py-6">
+        <h2 className="text-xl font-semibold text-slate-900 tracking-tight">Add New Product</h2>
+        <p className="text-slate-500 text-sm mt-1">Fill in the details below to create a new listing.</p>
       </div>
 
-      {/* Dropdowns row 2 */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Select
-          id="style"
-          label="Style"
-          options={STYLES}
-          value={form.style}
-          onChange={(e) => setField("style", e.target.value)}
-        />
-        <Select
-          id="size"
-          label="Size"
-          options={SIZES}
-          value={form.size}
-          onChange={(e) => setField("size", e.target.value)}
-        />
-      </div>
+      <form onSubmit={handleSubmit} className="p-8 space-y-12">
+        
+        {/* Section: Media */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h3 className="text-base font-medium text-slate-900">1. Product Image</h3>
+            <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Required</span>
+          </div>
+          <ImageUpload onFileChange={setImageFile} />
+        </div>
 
-      {/* Stock Available toggle */}
-      <Toggle
-        id="stockAvailable"
-        label="Stock Available"
-        checked={form.stockAvailable}
-        onChange={(val) => setField("stockAvailable", val)}
-      />
+        {/* Section: Basic Info */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h3 className="text-base font-medium text-slate-900">2. Basic Details</h3>
+             <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Required</span>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-6">
+             <Input
+              id="title"
+              name="title"
+              label="Product Title"
+              type="text"
+              placeholder="e.g. Vintage Gold Necklace"
+              value={form.title}
+              onChange={(e) => setField("title", e.target.value)}
+              required
+            />
+          </div>
 
-      {/* Make to order duration */}
-      <InputWithSuffix
-        id="makeToOrderDays"
-        label="Make to order duration"
-        type="number"
-        min="0"
-        placeholder="Enter here"
-        suffix="days"
-        value={form.makeToOrderDays}
-        onChange={(e) => setField("makeToOrderDays", e.target.value)}
-      />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <Select
+              id="jewellery_type"
+              label="Type"
+              options={JEWELLERY_TYPES}
+              value={form.jewellery_type}
+              onChange={(e) => setField("jewellery_type", e.target.value)}
+            />
+            <Select
+              id="category"
+              label="Material Category"
+              options={CATEGORIES}
+              value={form.category}
+              onChange={(e) => setField("category", e.target.value)}
+            />
+          </div>
 
-      {/* Metal Purity */}
-      <Select
-        id="metalPurity"
-        label="Metal Purity"
-        options={METAL_PURITIES}
-        value={form.metalPurity}
-        onChange={(e) => setField("metalPurity", e.target.value)}
-      />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <Select
+              id="style"
+              label="Style Aesthetic"
+              options={STYLES}
+              value={form.style}
+              onChange={(e) => setField("style", e.target.value)}
+            />
+            <div className="grid grid-cols-2 gap-4">
+               <Select
+                id="size"
+                label="Size"
+                options={SIZES}
+                value={form.size}
+                onChange={(e) => setField("size", e.target.value)}
+              />
+               <Select
+                id="metalPurity"
+                label="Purity"
+                options={METAL_PURITIES}
+                value={form.metalPurity}
+                onChange={(e) => setField("metalPurity", e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
 
-      {/* Weights */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <InputWithSuffix
-          id="netWeight"
-          label="Net weight"
-          type="number"
-          min="0"
-          step="0.01"
-          placeholder="Enter here"
-          suffix="g"
-          value={form.netWeight}
-          onChange={(e) => setField("netWeight", e.target.value)}
-        />
-        <InputWithSuffix
-          id="grossWeight"
-          label="Gross weight"
-          type="number"
-          min="0"
-          step="0.01"
-          placeholder="Enter here"
-          suffix="g"
-          value={form.grossWeight}
-          onChange={(e) => setField("grossWeight", e.target.value)}
-        />
-        <InputWithSuffix
-          id="stoneWeight"
-          label="Stone weight"
-          type="number"
-          min="0"
-          step="0.01"
-          placeholder="Enter here"
-          suffix="g"
-          value={form.stoneWeight}
-          onChange={(e) => setField("stoneWeight", e.target.value)}
-        />
-      </div>
+        {/* Section: Specifications */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h3 className="text-base font-medium text-slate-900">3. Specifications</h3>
+             <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Optional</span>
+          </div>
 
-      {/* Error */}
-      {error && (
-        <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-600">
-          {error}
-        </p>
-      )}
+          {/* Weights */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <InputWithSuffix
+              id="netWeight"
+              label="Net Weight"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              suffix="g"
+              value={form.netWeight}
+              onChange={(e) => setField("netWeight", e.target.value)}
+            />
+            <InputWithSuffix
+              id="grossWeight"
+              label="Gross Weight"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              suffix="g"
+              value={form.grossWeight}
+              onChange={(e) => setField("grossWeight", e.target.value)}
+            />
+            <InputWithSuffix
+              id="stoneWeight"
+              label="Stone Weight"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              suffix="g"
+              value={form.stoneWeight}
+              onChange={(e) => setField("stoneWeight", e.target.value)}
+            />
+          </div>
 
-      {/* Submit */}
-      <button
-        type="submit"
-        className="w-full h-12 rounded-md bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
-      >
-        Continue
-      </button>
-    </form>
+          <div className="flex items-center justify-between border border-slate-200 p-4 rounded-lg bg-slate-50/50">
+             <div className="flex flex-col">
+                <span className="text-sm font-medium text-slate-900">Stock Status</span>
+                <span className="text-xs text-slate-500">Is this item currently in stock?</span>
+             </div>
+             <Toggle
+              id="stockAvailable"
+              label=""
+              checked={form.stockAvailable}
+              onChange={(val) => setField("stockAvailable", val)}
+            />
+          </div>
+
+           {!form.stockAvailable && (
+             <div className="animate-scaleIn origin-top">
+                <InputWithSuffix
+                  id="makeToOrderDays"
+                  label="Production Time"
+                  type="number"
+                  min="0"
+                  placeholder="e.g. 15"
+                  suffix="days"
+                  value={form.makeToOrderDays}
+                  onChange={(e) => setField("makeToOrderDays", e.target.value)}
+                />
+             </div>
+           )}
+
+        </div>
+
+        {/* Error */}
+        {error && (
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4 animate-scaleIn">
+            <div className="flex">
+               <div className="flex-shrink-0">
+                 <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                 </svg>
+               </div>
+               <div className="ml-3">
+                 <h3 className="text-sm font-medium text-red-800">{error}</h3>
+               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Submit */}
+        <div className="pt-6 border-t border-slate-100">
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center gap-2 h-12 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg transition-colors focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Create Product
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

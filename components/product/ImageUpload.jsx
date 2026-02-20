@@ -39,39 +39,53 @@ export function ImageUpload({ onFileChange }) {
         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
-        className={`relative flex h-52 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors ${
-          dragOver
-            ? "border-gray-400 bg-gray-50"
-            : "border-gray-300 bg-blue-50/50 hover:border-gray-400 hover:bg-gray-50"
+        className={`relative flex min-h-[400px] w-full cursor-pointer flex-col items-center justify-center border border-gray-200 bg-white transition-all duration-300 ease-out hover:border-gray-900 ${
+          dragOver ? "border-gray-900 bg-gray-50 scale-[0.99]" : ""
         }`}
       >
         {preview ? (
           <>
             <Image
               src={preview}
-              alt="Product preview"
+              alt="Preview"
               fill
-              className="rounded-xl object-contain p-2"
+              className="object-contain p-8"
             />
             <button
               type="button"
               onClick={handleRemove}
-              className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-900 text-white shadow-sm hover:bg-gray-700"
+              className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-white border border-gray-200 text-gray-900 hover:bg-gray-100 transition-colors z-20"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </button>
+            <div className="absolute bottom-4 left-0 right-0 text-center pointer-events-none">
+              <span className="text-xs uppercase tracking-widest text-gray-400 font-medium bg-white px-2 py-1 border border-gray-100">
+                Click to change
+              </span>
+            </div>
           </>
         ) : (
-          <div className="flex flex-col items-center gap-2 text-center px-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-blue-300 bg-white text-blue-400">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="flex flex-col items-center gap-6 px-4 text-center">
+            <div className={`h-16 w-16 border border-gray-200 flex items-center justify-center rounded-none transition-colors ${dragOver ? 'border-gray-400' : ''}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
             </div>
-            <p className="text-sm font-medium text-gray-600">Click or drag to upload</p>
-            <p className="text-xs text-gray-400">JPEG, PNG, WebP · max 10 MB</p>
+            <div className="space-y-2">
+              <p className="font-serif text-2xl text-gray-900 tracking-tight">
+                Upload Product Image
+              </p>
+              <p className="text-sm text-gray-500 font-light tracking-wide">
+                Drag and drop or click to browse
+              </p>
+            </div>
+            <div className="flex gap-4 pt-4 opacity-40">
+              <span className="text-[10px] uppercase tracking-widest text-gray-500">JPGE</span>
+              <span className="text-[10px] uppercase tracking-widest text-gray-500">PNG</span>
+              <span className="text-[10px] uppercase tracking-widest text-gray-500">WEBP</span>
+            </div>
           </div>
         )}
       </div>
