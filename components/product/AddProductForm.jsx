@@ -74,9 +74,10 @@ const INITIAL_FORM = {
 export function AddProductForm() {
   const [form, setForm] = useState(INITIAL_FORM);
   const [imageFile, setImageFile] = useState(null);
-  const [status, setStatus] = useState("idle"); // idle | uploading | processing | saving | done | error
+  const [status, setStatus] = useState("idle"); // idle | uploading | processing | bg_removed | saving | done | error
   const [processedUrl, setProcessedUrl] = useState(null);
   const [rawImageUrl, setRawImageUrl] = useState(null);
+  const [bgRemovedUrl, setBgRemovedUrl] = useState(null);
   const [error, setError] = useState(null);
 
   function setField(key, value) {
@@ -103,6 +104,7 @@ export function AddProductForm() {
         },
         {
           onStatusChange: setStatus,
+          onBgRemoved: setBgRemovedUrl,
         }
       );
 
@@ -143,16 +145,18 @@ export function AddProductForm() {
     setImageFile(null);
     setProcessedUrl(null);
     setRawImageUrl(null);
+    setBgRemovedUrl(null);
     setError(null);
     setStatus("idle");
   }
 
-  const isProcessing = status === "uploading" || status === "processing" || status === "saving";
+  const isProcessing = status === "uploading" || status === "processing" || status === "bg_removed" || status === "saving";
 
   if (isProcessing || status === "done") {
     return (
       <ProcessingView
         status={status}
+        bgRemovedUrl={bgRemovedUrl}
         processedUrl={processedUrl}
         onReset={handleReset}
       />
