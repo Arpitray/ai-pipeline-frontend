@@ -1,27 +1,27 @@
 export function Select({ id, label, options = [], ...props }) {
   return (
-    <div className="flex flex-col gap-1.5 w-full">
+    <div className="flex flex-col gap-2 w-full group">
       {label && (
-        <label htmlFor={id} className="text-sm font-medium text-gray-700">
+        <label htmlFor={id} className="text-sm font-semibold text-stone-700 transition-colors group-focus-within:text-stone-900">
           {label}
         </label>
       )}
       <div className="relative">
         <select
           id={id}
-          className="appearance-none w-full h-12 rounded-md border border-gray-300 bg-white px-3 py-2 pr-10 text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent disabled:opacity-50"
+          className="appearance-none w-full h-14 rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 pr-10 text-base text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-900/10 focus:border-stone-400 focus:bg-white transition-all duration-200 ease-out shadow-sm hover:border-stone-300 disabled:opacity-50"
           {...props}
         >
-          <option value="">Enter here</option>
+          <option value="" className="text-stone-400">Select...</option>
           {options.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+        <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
           <svg
-            className="h-4 w-4 text-gray-400"
+            className="h-5 w-5 text-stone-500 group-hover:text-stone-800 transition-colors"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"

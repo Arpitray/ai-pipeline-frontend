@@ -7,15 +7,37 @@ import { Input } from "../ui/Input";
 import { GoogleButton } from "../ui/GoogleButton";
 import { signUp, signInWithGoogle } from "../../lib/actions/auth";
 
+const ROLES = [
+  {
+    value: "wholesaler",
+    label: "Wholesaler",
+    hint: "I upload & sell jewellery",
+    icon: "🏪",
+  },
+  {
+    value: "retailer",
+    label: "Retailer",
+    hint: "I browse & source jewellery",
+    icon: "🛍️",
+  },
+];
+
 export function SignUpForm() {
-  const [error, setError] = useState(null);
+  const [error, setError]   = useState(null);
   const [loading, setLoading] = useState(false);
+  const [role, setRole]     = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!role) {
+      setError("Please select a role before continuing.");
+      return;
+    }
     setError(null);
     setLoading(true);
-    const result = await signUp(new FormData(e.target));
+    const fd = new FormData(e.target);
+    fd.set("role", role); // inject selected role
+    const result = await signUp(fd);
     if (result?.error) {
       setError(result.error);
       setLoading(false);
@@ -30,6 +52,37 @@ export function SignUpForm() {
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+
+      {/* ── Role selector ── */}
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-stone-700">I am a…</p>
+        <div className="grid grid-cols-2 gap-3">
+          {ROLES.map((r) => {
+            const isSelected = role === r.value;
+            return (
+              <button
+                key={r.value}
+                type="button"
+                onClick={() => setRole(r.value)}
+                className={`
+                  flex flex-col items-center gap-1.5 py-4 px-3 rounded-xl border-2 transition-all text-center
+                  ${isSelected
+                    ? "border-amber-500 bg-amber-50 shadow-sm"
+                    : "border-stone-200 bg-white hover:border-stone-300"}
+                `}
+              >
+                <span className="text-2xl">{r.icon}</span>
+                <span className={`text-sm font-semibold ${isSelected ? "text-amber-800" : "text-stone-700"}`}>
+                  {r.label}
+                </span>
+                <span className="text-[11px] text-stone-400">{r.hint}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Credentials ── */}
       <div className="space-y-4">
         <Input
           id="email"
@@ -69,13 +122,13 @@ export function SignUpForm() {
       </div>
 
       <GoogleButton onClick={handleGoogle} text="Sign up with Google" />
+      <p className="text-xs text-stone-400 text-center -mt-2">
+        You&apos;ll choose your role after Google sign-up.
+      </p>
 
       <p className="mt-4 text-center text-sm text-gray-500">
         Already have an account?{" "}
-        <Link
-          href="/signin"
-          className="font-semibold text-orange-500 hover:text-orange-600"
-        >
+        <Link href="/signin" className="font-semibold text-orange-500 hover:text-orange-600">
           LOGIN
         </Link>
       </p>
