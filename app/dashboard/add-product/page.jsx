@@ -19,17 +19,19 @@ export default async function AddProductPage() {
       
       {/* Top bar */}
       <header className="sticky top-0 z-50 flex items-center justify-between border-b border-celestique-taupe bg-celestique-cream/90 backdrop-blur-md px-8 py-6">
-        <div className="flex items-center gap-4">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-celestique-dark/60 hover:text-celestique-dark transition-colors"
-          >
-            <span className="text-lg leading-none">&larr;</span>
-            Back to Dashboard
-          </Link>
-        </div>
         <div className="flex items-center gap-6">
-           <span className="text-[10px] uppercase tracking-[0.2em] text-celestique-dark/60 border-r border-celestique-taupe pr-6 hidden sm:block">
+          <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-celestique-dark hidden sm:block">
+            / UPLOAD STUDIO
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+           <Link
+             href="/dashboard/my-uploads"
+             className="text-[10px] uppercase tracking-[0.2em] font-bold text-celestique-dark/70 hover:text-celestique-dark border border-celestique-dark/15 hover:border-celestique-dark/40 px-4 py-2.5 transition-all duration-300"
+           >
+             My Uploads
+           </Link>
+           <span className="text-[10px] uppercase tracking-[0.1em] text-celestique-dark/50 border-r border-celestique-taupe pr-4 hidden sm:block">
               {user.email}
            </span>
            <SignOutButton />

@@ -4,6 +4,7 @@ import { ProductCard } from "../components/product/ProductCard";
 import { SignOutButton } from "../components/auth/SignOutButton";
 import { Hero } from "../components/product/Hero";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Celestique | Timeless Jewelry",
@@ -17,6 +18,14 @@ export default async function HomePage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // Hard gate: wholesalers must never see the retailer storefront.
+  // Middleware handles it on first load; this catches any edge cases.
+  if (user) {
+    const role = user.user_metadata?.role;
+    if (!role) redirect("/select-role");
+    if (role === "wholesaler") redirect("/dashboard/add-product");
+  }
 
   const products = await getAllProducts();
 
