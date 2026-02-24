@@ -1,8 +1,10 @@
 import { updateSession } from "./lib/supabase/middleware";
 
-export async function middleware(request) {
+async function proxy(request) {
   return await updateSession(request);
 }
+
+export default proxy;
 
 export const config = {
   matcher: [
