@@ -2,6 +2,7 @@ import { getAllProducts } from "../lib/api/supabase-products";
 import { createClient } from "../lib/supabase/server";
 import { ProductCard } from "../components/product/ProductCard";
 import { SignOutButton } from "../components/auth/SignOutButton";
+import { Hero } from "../components/product/Hero";
 import Link from "next/link";
 
 export const metadata = {
@@ -43,37 +44,7 @@ export default async function HomePage() {
       </header>
 
       {/* ── Hero Section ── */}
-      <section className="relative px-6 md:px-12 pt-12 pb-32 flex flex-col items-center">
-        
-        {/* Massive Title */}
-        <div className="w-full text-center z-20 mb-[-4vw] md:mb-[-6vw]">
-          <h1 className="font-serif text-[18vw] leading-none tracking-tighter text-celestique-dark uppercase">
-            CELESTIQUE
-          </h1>
-        </div>
-
-        {/* Hero Image Area */}
-        <div className="relative w-full max-w-6xl aspect-[16/10] md:aspect-[21/9] z-10 overflow-hidden bg-celestique-taupe/10">
-           <img 
-             src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
-             alt="Hero Jewelry" 
-             className="w-full h-full object-cover mix-blend-multiply opacity-90 transition-transform duration-1000 hover:scale-105"
-           />
-        </div>
-
-        {/* Sub-text below hero image */}
-        <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between items-start md:items-end mt-12 gap-8 text-[10px] uppercase tracking-[0.2em] font-medium text-celestique-dark/60">
-          <div className="max-w-[300px] space-y-4">
-            <span className="block text-[8px] opacity-40">[ ESTABLISHED 2025 ]</span>
-            <p className="leading-relaxed">
-              Handcrafted unique jewelry, with soul. Designed for the modern aesthetic and the timeless spirit.
-            </p>
-          </div>
-          <Link href="#products" className="group flex items-center gap-4 border-b border-celestique-dark/20 pb-2 hover:border-celestique-dark transition-all duration-300">
-            Discover the Collection <span className="text-lg transition-transform group-hover:translate-x-1">&rarr;</span>
-          </Link>
-        </div>
-      </section>
+      <Hero />
 
       {/* ── Philosophy Section ── */}
       <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden">
