@@ -1,13 +1,13 @@
-import { Playfair_Display, Montserrat } from "next/font/google";
+import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
 });
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
 });
 
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${playfair.variable} ${montserrat.variable} font-sans antialiased bg-celestique-cream text-celestique-dark`}
+        className={`${bodoni.variable} ${jost.variable} font-sans antialiased bg-celestique-cream text-celestique-dark`}
       >
         {children}
       </body>

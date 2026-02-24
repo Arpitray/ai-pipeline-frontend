@@ -90,23 +90,21 @@ export function ProductCard({ product }) {
       </div>
 
       {/* ── Content ── */}
-      <div className="flex flex-col items-center text-center px-2">
-        <h3 className="font-serif text-xl text-celestique-dark mb-2 line-clamp-1">
+      <div className="flex items-center justify-between border-b border-celestique-dark/20 pb-2 mt-2">
+        <h3 className="font-sans text-[10px] uppercase tracking-[0.1em] font-medium text-celestique-dark line-clamp-1">
           {product.title || `${product.jewellery_type ? product.jewellery_type.charAt(0).toUpperCase() + product.jewellery_type.slice(1) : "Jewellery"} Piece`}
         </h3>
         
-        <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-celestique-dark/60">
-          {product.category && <span>{product.category}</span>}
-          {product.category && product.style && <span>&middot;</span>}
-          {product.style && <span>{product.style}</span>}
+        <div className="text-[10px] uppercase tracking-[0.1em] text-celestique-dark/60">
+          {product.category ? product.category : "24.000p"}
         </div>
-        
-        {product.wholesaler_email && (
-          <p className="text-[9px] tracking-[0.1em] uppercase text-celestique-dark/40 mt-3">
-            By {product.wholesaler_email.split('@')[0]}
-          </p>
-        )}
       </div>
+      
+      {product.wholesaler_email && (
+        <p className="text-[9px] tracking-[0.1em] uppercase text-celestique-dark/40 mt-2">
+          By {product.wholesaler_email.split('@')[0]}
+        </p>
+      )}
     </article>
   );
 }
