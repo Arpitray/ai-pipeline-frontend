@@ -32,22 +32,20 @@ export function Hero() {
       tl.to(imageRef.current, {
         width: "100vw",
         height: "100vh",
-        maxWidth: "100%",
-        maxHeight: "100%",
         borderRadius: "0px",
-        scale: 1,
-        ease: "none",
+        scale: 1.1, // Zoom in slightly more for impact
+        ease: "power2.inOut",
       })
       .to(titleRef.current, {
-        y: -150,
+        scale: 1.2,
         opacity: 0,
-        scale: 0.8,
-        ease: "none",
+        filter: "blur(10px)",
+        ease: "power2.in",
       }, 0) // Run title animation alongside image scale
       .to(contentRef.current, {
         opacity: 0,
-        y: 50,
-        ease: "none",
+        y: 100,
+        ease: "power2.in",
       }, 0);
 
       // Add a slight parallax or scale to the image itself inside the container
