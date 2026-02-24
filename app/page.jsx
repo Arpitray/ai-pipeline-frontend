@@ -43,89 +43,114 @@ export default async function HomePage() {
       </header>
 
       {/* ── Hero Section ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-12 overflow-hidden">
+      <section className="relative px-6 md:px-12 pt-12 pb-32 flex flex-col items-center">
         
         {/* Massive Title */}
-        <div className="w-full text-center relative z-20 pointer-events-none">
-          <h1 className="font-serif text-[22vw] leading-none tracking-tighter text-celestique-dark mix-blend-darken">
+        <div className="w-full text-center z-20 mb-[-4vw] md:mb-[-6vw]">
+          <h1 className="font-serif text-[18vw] leading-none tracking-tighter text-celestique-dark uppercase">
             CELESTIQUE
           </h1>
         </div>
 
         {/* Hero Image Area */}
-        <div className="absolute inset-0 w-full h-full z-10 flex items-center justify-center">
-           <div className="relative w-[90vw] h-[85vh] overflow-hidden">
-             <img 
-               src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
-               alt="Hero Jewelry" 
-               className="w-full h-full object-cover mix-blend-multiply transition-transform duration-1000 hover:scale-105"
-             />
-           </div>
+        <div className="relative w-full max-w-6xl aspect-[16/10] md:aspect-[21/9] z-10 overflow-hidden bg-celestique-taupe/10">
+           <img 
+             src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
+             alt="Hero Jewelry" 
+             className="w-full h-full object-cover mix-blend-multiply opacity-90 transition-transform duration-1000 hover:scale-105"
+           />
         </div>
 
         {/* Sub-text below hero image */}
-        <div className="absolute bottom-12 left-6 right-6 md:left-12 md:right-12 flex justify-between items-end z-30 text-[10px] uppercase tracking-[0.2em] font-medium text-celestique-dark/60">
-          <p className="max-w-[250px] leading-relaxed">
-            Handcrafted unique jewelry, with soul.<br/>Designed for the modern aesthetic.
-          </p>
-          <Link href="#products" className="group flex items-center gap-4 border-b border-current pb-2 hover:text-celestique-dark transition-colors">
+        <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between items-start md:items-end mt-12 gap-8 text-[10px] uppercase tracking-[0.2em] font-medium text-celestique-dark/60">
+          <div className="max-w-[300px] space-y-4">
+            <span className="block text-[8px] opacity-40">[ ESTABLISHED 2025 ]</span>
+            <p className="leading-relaxed">
+              Handcrafted unique jewelry, with soul. Designed for the modern aesthetic and the timeless spirit.
+            </p>
+          </div>
+          <Link href="#products" className="group flex items-center gap-4 border-b border-celestique-dark/20 pb-2 hover:border-celestique-dark transition-all duration-300">
             Discover the Collection <span className="text-lg transition-transform group-hover:translate-x-1">&rarr;</span>
           </Link>
         </div>
       </section>
 
       {/* ── Philosophy Section ── */}
-      <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">
-            [ our philosophy ]
-          </span>
-          <h2 className="font-sans text-2xl md:text-4xl font-medium leading-snug tracking-tight uppercase">
-            EVERY PIECE IS MORE THAN AN ACCESSORY.
-            IT IS LIVING ENERGY, ENCLOSED IN FORM,
-            CREATED TO INSPIRE, SURPRISE,
-            AND REMIND US THAT WE ARE PART OF SOMETHING GREATER.
-          </h2>
-        </div>
+      <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          
+          <div className="lg:col-span-5 space-y-12">
+            <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-celestique-dark/40 block">
+              / PHILOSOPHY
+            </span>
+            <h2 className="font-serif text-4xl md:text-6xl leading-[1.1] tracking-tight text-celestique-dark italic">
+              "Every piece is living energy, enclosed in form."
+            </h2>
+            <p className="text-sm md:text-base text-celestique-dark/60 leading-relaxed font-sans max-w-md">
+              We believe in the resonance between stone and spirit. Our jewelry isn't just worn; it's a conversation with the natural world, captured in gold and silver.
+            </p>
+            <div className="pt-8">
+              <Link href="/signup" className="group text-[10px] uppercase tracking-[0.2em] font-bold flex items-center gap-4 hover:gap-6 transition-all duration-300">
+                Join our Inner Circle <span className="text-lg">&rarr;</span>
+              </Link>
+            </div>
+          </div>
 
-        {/* Editorial Image Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-24 max-w-5xl mx-auto">
-          <div className="aspect-square bg-celestique-taupe/30 flex items-center justify-center overflow-hidden">
-             <img 
-               src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2070&auto=format&fit=crop" 
-               alt="Editorial Hand" 
-               className="w-full h-full object-cover mix-blend-multiply"
-             />
+          <div className="lg:col-span-7 relative">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="mt-12 aspect-[3/4] overflow-hidden bg-celestique-taupe/20 rounded-sm">
+                <img 
+                  src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Crafting" 
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                />
+              </div>
+              <div className="aspect-[3/4] overflow-hidden bg-celestique-taupe/20 rounded-sm">
+                <img 
+                  src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=1887&auto=format&fit=crop" 
+                  alt="The Result" 
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 cursor-pointer"
+                />
+              </div>
+            </div>
+            {/* Float badge */}
+            <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-celestique-dark rounded-full flex items-center justify-center text-celestique-cream text-center p-4 transform -rotate-12 hidden md:flex">
+              <span className="text-[9px] uppercase tracking-widest font-bold">Nature's Own Design 2025</span>
+            </div>
           </div>
-          <div className="aspect-square bg-celestique-taupe/30 flex items-center justify-center overflow-hidden">
-             <img 
-               src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=1887&auto=format&fit=crop" 
-               alt="Editorial Model" 
-               className="w-full h-full object-cover mix-blend-multiply"
-             />
-          </div>
+
         </div>
       </section>
 
       {/* ── Products Section ── */}
-      <section id="products" className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto border-t border-celestique-border/30">
+      <section id="products" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto border-t border-celestique-dark/10">
         
-        <div className="max-w-4xl mx-auto text-center space-y-8 mb-24">
-          <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">
-            [ our creations ]
-          </span>
-          <h2 className="font-sans text-2xl md:text-3xl font-medium leading-snug tracking-tight uppercase">
-            RINGS CREATED BY THE INSPIRATION OF NATURE —
-            TEXTURES OF ROCKS, BARK OF TREES, AND FORMS
-            CREATED BY TIME.
-          </h2>
-          <p className="text-[11px] uppercase tracking-[0.1em] opacity-60 max-w-md mx-auto leading-relaxed">
-            We use natural minerals and strive to preserve the feeling of naturalness and significance in every ring.
-          </p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+          <div className="space-y-6">
+            <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-celestique-dark/40">
+              / THE COLLECTION
+            </span>
+            <h2 className="font-serif text-5xl md:text-7xl tracking-tighter text-celestique-dark uppercase">
+              Curated <br/>Selection
+            </h2>
+          </div>
+          <div className="max-w-xs">
+            <p className="text-[11px] uppercase tracking-[0.1em] text-celestique-dark/60 leading-relaxed mb-6">
+              A meticulously crafted series of rings, inspired by the raw textures of nature and the rhythmic flow of time.
+            </p>
+            <div className="flex gap-4">
+              <button className="h-10 w-10 rounded-full border border-celestique-dark/10 flex items-center justify-center hover:bg-celestique-dark hover:text-celestique-cream transition-colors">
+                &larr;
+              </button>
+              <button className="h-10 w-10 rounded-full border border-celestique-dark/10 flex items-center justify-center hover:bg-celestique-dark hover:text-celestique-cream transition-colors">
+                &rarr;
+              </button>
+            </div>
+          </div>
         </div>
 
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -141,12 +166,34 @@ export default async function HomePage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-celestique-border/30 py-12 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between text-[10px] uppercase tracking-[0.1em] font-medium">
-        <div className="text-2xl font-serif tracking-tighter">CELESTIQUE</div>
-        <div className="flex gap-8 mt-6 md:mt-0 opacity-60">
-          <Link href="#" className="hover:opacity-100 transition-opacity">Instagram</Link>
-          <Link href="#" className="hover:opacity-100 transition-opacity">Telegram</Link>
-          <Link href="#" className="hover:opacity-100 transition-opacity">Contact</Link>
+      <footer className="border-t border-celestique-dark/10 pt-24 pb-12 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
+          <div className="md:col-span-2 space-y-8">
+            <div className="text-4xl font-serif tracking-tighter text-celestique-dark">CELESTIQUE</div>
+            <p className="text-[10px] uppercase tracking-[0.2em] font-medium text-celestique-dark/60 max-w-xs leading-relaxed">
+              Timeless jewelry for the modern spirit. Handcrafted with precision and passion in our studio.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-celestique-dark">Explore</h4>
+            <ul className="space-y-2 text-[10px] uppercase tracking-[0.1em] text-celestique-dark/60">
+              <li><Link href="#products" className="hover:text-celestique-dark transition-colors">Collections</Link></li>
+              <li><Link href="#" className="hover:text-celestique-dark transition-colors">Philosophy</Link></li>
+              <li><Link href="#" className="hover:text-celestique-dark transition-colors">Bespoke</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-celestique-dark">Connect</h4>
+            <ul className="space-y-2 text-[10px] uppercase tracking-[0.1em] text-celestique-dark/60">
+              <li><Link href="#" className="hover:text-celestique-dark transition-colors">Instagram</Link></li>
+              <li><Link href="#" className="hover:text-celestique-dark transition-colors">Telegram</Link></li>
+              <li><Link href="#" className="hover:text-celestique-dark transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-celestique-dark/5 gap-4">
+          <span className="text-[9px] uppercase tracking-[0.2em] text-celestique-dark/40">&copy; 2025 Studio Celestique. All rights reserved.</span>
+          <span className="text-[9px] uppercase tracking-[0.2em] text-celestique-dark/40 font-bold italic">Crafted by hand. Born from nature.</span>
         </div>
       </footer>
     </div>
