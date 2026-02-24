@@ -20,49 +20,46 @@ export function Hero() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=150%", // How long the pinning/animation lasts
-          scrub: 1,      // Smooth scrubbing
+          end: "+=120%", // Slightly shorter to feel faster
+          scrub: 0.5,     // Snappier scrub
           pin: true,     // Pin the section while animating
           anticipatePin: 1,
         },
       });
 
-      // Initial state: Image is small and rounded
-      // Animation: Scale up to fill the viewport and remove border radius
-      tl.to(imageRef.current, {
-        width: "100vw",
-        height: "100vh",
-        borderRadius: "0px",
-        scale: 1.1, // Zoom in slightly more for impact
-        ease: "power2.inOut",
-      })
+      // Using clip-path is significantly more performant than width/height
+      // Initial state: inset card
+      // Final state: full screen
+      tl.fromTo(imageRef.current, 
+        { 
+          clipPath: "inset(20% 15% 20% 15% round 32px)",
+          scale: 0.9,
+        },
+        {
+          clipPath: "inset(0% 0% 0% 0% round 0px)",
+          scale: 1,
+          duration: 1,
+          ease: "none",
+        }
+      )
       .to(titleRef.current, {
-        scale: 1.2,
+        scale: 1.5,
         opacity: 0,
-        filter: "blur(10px)",
-        ease: "power2.in",
-      }, 0) // Run title animation alongside image scale
+        filter: "blur(20px)",
+        duration: 0.5,
+      }, 0) // Title disappears quickly as image grows
       .to(contentRef.current, {
         opacity: 0,
-        y: 100,
-        ease: "power2.in",
+        y: 50,
+        duration: 0.4,
       }, 0);
 
-      // Add a slight parallax or scale to the image itself inside the container
-      gsap.fromTo(
-        imageRef.current.querySelector("img"),
-        { scale: 1.2 },
-        {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
+      // Simple parallax on the image internal
+      tl.to(imageRef.current.querySelector("img"), {
+        scale: 1.2,
+        ease: "none",
+      }, 0);
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -71,34 +68,34 @@ export function Hero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-celestique-cream"
+      className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-celestique-cream"
     >
       {/* Massive Title - Vibrant Red */}
       <div 
         ref={titleRef}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-20 pointer-events-none select-none"
+        className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none select-none will-change-transform"
       >
-        <h1 className="font-serif text-[18vw] leading-none tracking-tighter text-[#FF1E1E] uppercase drop-shadow-[0_10px_10px_rgba(0,0,0,0.1)]">
+        <h1 className="font-serif text-[18vw] leading-none font-bold tracking-tighter text-[#FF1E1E] uppercase drop-shadow-2xl">
           CELESTIQUE.
         </h1>
       </div>
 
-      {/* Hero Image Area - Starts small, grows to full screen */}
+      {/* Hero Image Area - Controlled by clip-path for performance */}
       <div 
         ref={imageRef} 
-        className="relative w-[60vw] h-[50vh] max-w-6xl z-10 overflow-hidden bg-celestique-taupe/10 rounded-2xl shadow-2xl transition-shadow duration-700"
+        className="absolute inset-0 z-10 overflow-hidden bg-celestique-taupe/10 will-change-[clip-path,transform]"
       >
          <img 
            src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
            alt="Hero Jewelry" 
-           className="w-full h-full object-cover mix-blend-multiply opacity-90"
+           className="w-full h-full object-cover mix-blend-multiply opacity-90 will-change-transform"
          />
       </div>
 
       {/* Sub-text and Discovery Link */}
       <div 
         ref={contentRef}
-        className="absolute bottom-12 w-full px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end z-30 gap-8 text-[10px] uppercase tracking-[0.2em] font-medium text-celestique-dark/60"
+        className="absolute bottom-12 w-full px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end z-30 gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-celestique-dark/60 will-change-transform"
       >
         <div className="max-w-[300px] space-y-4">
           <span className="block text-[8px] opacity-40">[ ESTABLISHED 2025 ]</span>
