@@ -167,89 +167,105 @@ export function AddProductForm() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto bg-celestique-cream border border-celestique-taupe">
+    <div className="max-w-5xl mx-auto">
       
       {/* Header */}
-      <div className="px-8 py-12 md:px-16 md:py-16 border-b border-celestique-taupe text-center">
-        <h2 className="text-4xl md:text-5xl font-serif text-celestique-dark tracking-tight">Add New Product</h2>
-        <p className="text-celestique-dark/60 mt-4 text-sm uppercase tracking-[0.2em]">Enter the details below to create a new listing</p>
+      <div className="px-6 py-20 text-center space-y-8">
+        <div className="inline-block px-3 py-1 bg-[#FF1E1E] text-celestique-cream text-[8px] uppercase tracking-[0.3em] font-bold">
+           CREATOR STUDIO
+        </div>
+        <h2 className="text-6xl md:text-8xl font-serif text-celestique-dark tracking-tighter leading-none italic">Add Piece.</h2>
+        <p className="text-celestique-dark/50 text-[10px] uppercase tracking-[0.3em] max-w-sm mx-auto font-medium">
+           DOCUMENT YOUR ARTISTRY. OUR AI WILL HANDLE THE EDITORIAL PRESENTATION.
+        </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-8 md:p-16 space-y-20">
+      <form onSubmit={handleSubmit} className="bg-celestique-cream border border-celestique-dark/10 p-8 md:p-20 space-y-24 shadow-2xl relative overflow-hidden">
         
+        {/* Subtle Decorative Text */}
+        <div className="absolute top-0 right-0 p-12 overflow-hidden pointer-events-none opacity-[0.02]">
+          <span className="text-[20vw] font-serif uppercase tracking-tighter leading-none">NEW</span>
+        </div>
+
         {/* Section: Media */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-           <div className="lg:col-span-4 space-y-4">
-             <h3 className="text-xl font-serif text-celestique-dark flex items-center gap-3">
-               <span className="text-sm font-sans uppercase tracking-[0.2em] text-celestique-dark/40">01</span>
-               Product Image
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10">
+           <div className="lg:col-span-5 space-y-6">
+             <div className="flex items-center gap-4">
+                <span className="w-10 h-px bg-celestique-dark/20"></span>
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#FF1E1E]">01 MEDIA</span>
+             </div>
+             <h3 className="text-4xl font-serif text-celestique-dark leading-tight tracking-tight">
+               Studio <br/>Photography
              </h3>
-             <p className="text-xs uppercase tracking-[0.1em] text-celestique-dark/60 leading-relaxed">
-               Upload a high-quality image. Our AI will automatically enhance it and remove the background.
+             <p className="text-[11px] uppercase tracking-[0.15em] text-celestique-dark/50 leading-relaxed font-medium">
+               Upload a high-quality capture. We generate four high-end editorial backgrounds automatically.
              </p>
            </div>
-           <div className="lg:col-span-8">
-             <ImageUpload onFileChange={setImageFile} />
+           <div className="lg:col-span-7">
+             <div className="shadow-2xl border border-celestique-dark/5 p-2 bg-white/50">
+               <ImageUpload onFileChange={setImageFile} />
+             </div>
            </div>
         </div>
 
-        <div className="h-px w-full bg-celestique-taupe"></div>
-
         {/* Section: Basic Info */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4 space-y-4">
-             <h3 className="text-xl font-serif text-celestique-dark flex items-center gap-3">
-               <span className="text-sm font-sans uppercase tracking-[0.2em] text-celestique-dark/40">02</span>
-               Essential Details
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10">
+          <div className="lg:col-span-5 space-y-6">
+             <div className="flex items-center gap-4">
+                <span className="w-10 h-px bg-celestique-dark/20"></span>
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#FF1E1E]">02 IDENTITY</span>
+             </div>
+             <h3 className="text-4xl font-serif text-celestique-dark leading-tight tracking-tight">
+               Essential <br/>Attributes
              </h3>
-             <p className="text-xs uppercase tracking-[0.1em] text-celestique-dark/60 leading-relaxed">
-               Define the core identity of your jewelry piece.
+             <p className="text-[11px] uppercase tracking-[0.15em] text-celestique-dark/50 leading-relaxed font-medium">
+               A piece is defined by its material, its purpose, and its soul.
              </p>
           </div>
           
-          <div className="lg:col-span-8 space-y-10">
+          <div className="lg:col-span-7 space-y-12">
             <div className="space-y-6">
               <Input
                 id="title"
                 name="title"
                 label="Product Title"
                 type="text"
-                placeholder="e.g. Vintage Gold Necklace"
+                placeholder="E.G. CELESTIAL GOLD BAND"
                 value={form.title}
                 onChange={(e) => setField("title", e.target.value)}
                 required
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
               <Select
                 id="jewellery_type"
-                label="Type"
+                label="Jewellery Type"
                 options={JEWELLERY_TYPES}
                 value={form.jewellery_type}
                 onChange={(e) => setField("jewellery_type", e.target.value)}
               />
               <Select
                 id="category"
-                label="Material Category"
+                label="Core Material"
                 options={CATEGORIES}
                 value={form.category}
                 onChange={(e) => setField("category", e.target.value)}
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
               <Select
                 id="style"
-                label="Style Aesthetic"
+                label="Aesthetic Style"
                 options={STYLES}
                 value={form.style}
                 onChange={(e) => setField("style", e.target.value)}
               />
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-8">
                 <Select
                   id="size"
-                  label="Size"
+                  label="Dimmension"
                   options={SIZES}
                   value={form.size}
                   onChange={(e) => setField("size", e.target.value)}
@@ -266,23 +282,24 @@ export function AddProductForm() {
           </div>
         </div>
 
-        <div className="h-px w-full bg-celestique-taupe"></div>
-
         {/* Section: Specifications */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4 space-y-4">
-             <h3 className="text-xl font-serif text-celestique-dark flex items-center gap-3">
-               <span className="text-sm font-sans uppercase tracking-[0.2em] text-celestique-dark/40">03</span>
-               Specifications
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10">
+          <div className="lg:col-span-5 space-y-6">
+             <div className="flex items-center gap-4">
+                <span className="w-10 h-px bg-celestique-dark/20"></span>
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#FF1E1E]">03 DATA</span>
+             </div>
+             <h3 className="text-4xl font-serif text-celestique-dark leading-tight tracking-tight">
+               Technical <br/>Specifications
              </h3>
-             <p className="text-xs uppercase tracking-[0.1em] text-celestique-dark/60 leading-relaxed">
-               Precise measurements and inventory details.
+             <p className="text-[11px] uppercase tracking-[0.15em] text-celestique-dark/50 leading-relaxed font-medium">
+               Precise measurements for archival clarity and client trust.
              </p>
           </div>
 
-          <div className="lg:col-span-8 space-y-10">
+          <div className="lg:col-span-7 space-y-12">
             {/* Weights */}
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 bg-celestique-taupe/10 p-8 border border-celestique-taupe">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 bg-white/40 p-10 border border-celestique-dark/5 shadow-inner">
               <InputWithSuffix
                 id="netWeight"
                 label="Net Weight"
@@ -290,38 +307,38 @@ export function AddProductForm() {
                 min="0"
                 step="0.01"
                 placeholder="0.00"
-                suffix="g"
+                suffix="G"
                 value={form.netWeight}
                 onChange={(e) => setField("netWeight", e.target.value)}
               />
               <InputWithSuffix
                 id="grossWeight"
-                label="Gross Weight"
+                label="Gross"
                 type="number"
                 min="0"
                 step="0.01"
                 placeholder="0.00"
-                suffix="g"
+                suffix="G"
                 value={form.grossWeight}
                 onChange={(e) => setField("grossWeight", e.target.value)}
               />
               <InputWithSuffix
                 id="stoneWeight"
-                label="Stone Weight"
+                label="Stones"
                 type="number"
                 min="0"
                 step="0.01"
                 placeholder="0.00"
-                suffix="g"
+                suffix="G"
                 value={form.stoneWeight}
                 onChange={(e) => setField("stoneWeight", e.target.value)}
               />
             </div>
 
-            <div className="flex items-center justify-between p-6 border border-celestique-taupe bg-celestique-taupe/5">
+            <div className="flex items-center justify-between p-8 border border-celestique-dark/10 bg-white/20">
               <div className="flex flex-col gap-2">
-                  <span className="text-xs uppercase tracking-[0.2em] text-celestique-dark">Available in Stock</span>
-                  <span className="text-[10px] uppercase tracking-[0.1em] text-celestique-dark/60">Is this piece ready for immediate shipment?</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-celestique-dark font-bold italic">Available In Portfolio</span>
+                  <span className="text-[9px] uppercase tracking-[0.1em] text-celestique-dark/40 font-medium">Ready for immediate client selection?</span>
               </div>
               <Toggle
                 id="stockAvailable"
@@ -332,17 +349,16 @@ export function AddProductForm() {
             </div>
 
             {!form.stockAvailable && (
-              <div className="animate-fade-in">
+              <div className="animate-in fade-in slide-in-from-top-4 duration-500">
                   <InputWithSuffix
                     id="makeToOrderDays"
-                    label="Production Time"
+                    label="Crafting Period"
                     type="number"
                     min="0"
-                    placeholder="e.g. 15"
-                    suffix="days"
+                    placeholder="14"
+                    suffix="DAYS"
                     value={form.makeToOrderDays}
                     onChange={(e) => setField("makeToOrderDays", e.target.value)}
-                    helperText="Days required to manufacture this piece"
                   />
               </div>
             )}
@@ -351,27 +367,30 @@ export function AddProductForm() {
 
         {/* Error */}
         {error && (
-          <div className="border border-red-200 bg-red-50 p-6 animate-fade-in">
-            <div className="flex items-center gap-4">
-               <div className="shrink-0 w-10 h-10 flex items-center justify-center border border-red-200 text-red-600">
+          <div className="border-l-4 border-[#FF1E1E] bg-[#FF1E1E]/5 p-8 animate-in fade-in zoom-in-95 duration-300">
+            <div className="flex items-center gap-6">
+               <div className="shrink-0 w-12 h-12 flex items-center justify-center border border-[#FF1E1E]/20 text-[#FF1E1E] font-serif text-xl italic">
                  !
                </div>
                <div>
-                 <h3 className="text-xs uppercase tracking-[0.2em] text-red-900">Submission Error</h3>
-                 <p className="text-sm text-red-700 mt-1">{error}</p>
+                 <h3 className="text-[10px] uppercase tracking-[0.3em] text-[#FF1E1E] font-bold">Registry Error</h3>
+                 <p className="text-[11px] uppercase tracking-[0.1em] text-[#FF1E1E]/70 mt-1 font-medium">{error}</p>
                </div>
             </div>
           </div>
         )}
 
         {/* Submit */}
-        <div className="pt-12 border-t border-celestique-taupe flex justify-end">
+        <div className="pt-16 border-t border-celestique-dark/10 flex justify-end items-center gap-12">
+          <p className="text-[9px] uppercase tracking-[0.4em] text-celestique-dark/30 font-bold hidden md:block">
+            VERIFY DETAILS · CELESTIQUE REVE SYSTEM
+          </p>
           <button
             type="submit"
-            className="group relative inline-flex items-center justify-center gap-4 px-10 py-4 bg-celestique-dark text-celestique-cream text-xs uppercase tracking-[0.2em] hover:bg-celestique-dark/90 transition-colors"
+            className="group relative inline-flex items-center justify-center gap-8 px-14 py-6 bg-celestique-dark text-celestique-cream text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-[#FF1E1E] transition-all duration-500 shadow-2xl active:scale-[0.98]"
           >
-            <span>Create Product</span>
-            <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
+            <span>Publish Piece</span>
+            <span className="text-lg transition-transform group-hover:translate-x-3">&rarr;</span>
           </button>
         </div>
       </form>

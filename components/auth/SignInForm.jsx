@@ -29,75 +29,75 @@ export function SignInForm() {
   }
 
   return (
-    <form className="mt-12 space-y-8" onSubmit={handleSubmit}>
-      <div className="space-y-6">
+    <form className="mt-8 space-y-12" onSubmit={handleSubmit}>
+      <div className="space-y-10">
         <Input
           id="email"
           name="email"
-          label="Your email"
+          label="Registry Email"
           type="email"
-          placeholder="Enter your email"
+          placeholder="ENTER YOUR EMAIL"
           required
         />
         <Input
           id="password"
           name="password"
-          label="Password"
+          label="Secure Key"
           type="password"
-          placeholder="Enter your password"
+          placeholder="ENTER YOUR PASSWORD"
           required
         />
       </div>
 
       <div className="flex items-center justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center group cursor-pointer">
           <input
             id="remember-me"
             name="remember-me"
             type="checkbox"
-            className="h-4 w-4 rounded-none border-celestique-taupe text-celestique-dark focus:ring-celestique-dark bg-transparent"
+            className="h-3 w-3 rounded-none border-celestique-dark/20 text-celestique-dark focus:ring-celestique-dark bg-transparent cursor-pointer"
           />
-          <label htmlFor="remember-me" className="ml-3 block text-[10px] uppercase tracking-[0.2em] text-celestique-dark/60">
-            Remember me
+          <label htmlFor="remember-me" className="ml-3 block text-[9px] uppercase tracking-[0.2em] text-celestique-dark/40 group-hover:text-celestique-dark/70 transition-colors cursor-pointer font-bold">
+            Stay Signed In
           </label>
         </div>
-        <div className="text-[10px] uppercase tracking-[0.2em]">
-          <Link href="#" className="text-celestique-dark/60 hover:text-celestique-dark transition-colors">
-            Forgot password?
+        <div className="text-[9px] uppercase tracking-[0.2em]">
+          <Link href="#" className="text-celestique-dark/40 hover:text-celestique-dark transition-colors font-bold border-b border-transparent hover:border-celestique-dark pb-0.5">
+            Lost Password?
           </Link>
         </div>
       </div>
 
       {error && (
-        <p className="text-[10px] uppercase tracking-[0.1em] text-red-600 bg-red-50 border border-red-200 px-4 py-3">
-          {error}
-        </p>
+        <div className="text-[9px] uppercase tracking-[0.2em] font-bold text-[#FF1E1E] bg-[#FF1E1E]/5 border-l-2 border-[#FF1E1E] px-4 py-4 animate-in fade-in slide-in-from-left-2 duration-300">
+          Error :: {error}
+        </div>
       )}
 
-      <Button type="submit" variant="primary" disabled={loading}>
-        {loading ? "Signing in…" : "Sign In"}
-      </Button>
-
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-celestique-taupe" />
-        </div>
-        <div className="relative flex justify-center text-[10px] uppercase tracking-[0.2em]">
-          <span className="bg-celestique-cream px-4 text-celestique-dark/40">OR</span>
-        </div>
-      </div>
-
-      <GoogleButton onClick={handleGoogle} text="Sign in with Google" />
-
-      <p className="mt-8 text-center text-[10px] uppercase tracking-[0.2em] text-celestique-dark/60">
-        Don&apos;t have an account?{" "}
-        <Link
-          href="/signup"
-          className="text-celestique-dark border-b border-celestique-dark pb-0.5 hover:text-celestique-dark/60 hover:border-celestique-dark/60 transition-colors ml-2"
+      <div className="space-y-6">
+        <Button 
+          type="submit" 
+          variant="primary" 
+          disabled={loading}
+          className="w-full h-14 bg-celestique-dark hover:bg-[#FF1E1E] text-celestique-cream text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-500 rounded-none transform active:scale-[0.98]"
         >
-          SIGN UP
-        </Link>
-      </p>
+          {loading ? "Verifying..." : "Access Portfolio"}
+        </Button>
+
+        <div className="relative py-4">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-celestique-dark/10" />
+          </div>
+          <div className="relative flex justify-center text-[8px] uppercase tracking-[0.4em]">
+            <span className="bg-celestique-cream px-4 text-celestique-dark/30 font-bold">AUTHENTICATION</span>
+          </div>
+        </div>
+
+        <GoogleButton 
+          onClick={handleGoogle} 
+          text="CONNECT WITH GOOGLE" 
+        />
+      </div>
     </form>
   );
 }
