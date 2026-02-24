@@ -54,20 +54,20 @@ export default async function HomePage() {
 
         {/* Hero Image Area */}
         <div className="relative w-full max-w-3xl aspect-[4/3] md:aspect-[16/9] bg-celestique-taupe/20 -mt-16 md:-mt-32 z-0 flex items-center justify-center overflow-hidden">
-           {/* Placeholder for the main ring image */}
-           <div className="absolute inset-0 flex items-center justify-center text-celestique-dark/30 font-serif text-xl">
-              [ Hero Image: Large Gold Ring ]
-           </div>
+           <img 
+             src="https://images.unsplash.com/photo-1605100804763-247f6612523e?q=80&w=2070&auto=format&fit=crop" 
+             alt="Hero Jewelry" 
+             className="w-full h-full object-cover mix-blend-multiply"
+           />
         </div>
 
         {/* Sub-text below hero image */}
         <div className="w-full max-w-[1400px] flex justify-between items-end mt-8 text-[10px] uppercase tracking-[0.1em] opacity-60">
           <p className="max-w-[200px] leading-relaxed">
-            Создаём уникальные ювелирные украшения ручной работы, с душой
-            <br/>(Handcrafted unique jewelry, with soul)
+            Handcrafted unique jewelry, with soul. Designed for the modern aesthetic.
           </p>
           <Link href="#products" className="border-b border-current pb-0.5 hover:opacity-100 transition-opacity">
-            Посмотреть изделия &rarr;
+            View Collection &rarr;
           </Link>
         </div>
       </section>
@@ -76,23 +76,31 @@ export default async function HomePage() {
       <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">
-            [ наша философия ]
+            [ our philosophy ]
           </span>
           <h2 className="font-sans text-2xl md:text-4xl font-medium leading-snug tracking-tight uppercase">
-            КАЖДОЕ КОЛЬЦО — ЭТО БОЛЬШЕ, ЧЕМ АКСЕССУАР.
-            ЭТО ЖИВАЯ ЭНЕРГИЯ, ЗАКЛЮЧЕННАЯ В ФОРМУ,
-            СОЗДАННАЯ, ЧТОБЫ ВДОХНОВЛЯТЬ, УДИВЛЯТЬ
-            И НАПОМИНАТЬ, ЧТО МЫ — ЧАСТЬ ЧЕГО-ТО БОЛЬШЕГО
+            EVERY PIECE IS MORE THAN AN ACCESSORY.
+            IT IS LIVING ENERGY, ENCLOSED IN FORM,
+            CREATED TO INSPIRE, SURPRISE,
+            AND REMIND US THAT WE ARE PART OF SOMETHING GREATER.
           </h2>
         </div>
 
         {/* Editorial Image Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-24 max-w-5xl mx-auto">
-          <div className="aspect-square bg-celestique-taupe/30 flex items-center justify-center">
-             <span className="font-serif text-celestique-dark/30">[ Hand holding egg/ring ]</span>
+          <div className="aspect-square bg-celestique-taupe/30 flex items-center justify-center overflow-hidden">
+             <img 
+               src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2070&auto=format&fit=crop" 
+               alt="Editorial Hand" 
+               className="w-full h-full object-cover mix-blend-multiply"
+             />
           </div>
-          <div className="aspect-square bg-celestique-taupe/30 flex items-center justify-center">
-             <span className="font-serif text-celestique-dark/30">[ Model face with ring ]</span>
+          <div className="aspect-square bg-celestique-taupe/30 flex items-center justify-center overflow-hidden">
+             <img 
+               src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=1887&auto=format&fit=crop" 
+               alt="Editorial Model" 
+               className="w-full h-full object-cover mix-blend-multiply"
+             />
           </div>
         </div>
       </section>
@@ -102,15 +110,15 @@ export default async function HomePage() {
         
         <div className="max-w-4xl mx-auto text-center space-y-8 mb-24">
           <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">
-            [ наши изделия ]
+            [ our creations ]
           </span>
           <h2 className="font-sans text-2xl md:text-3xl font-medium leading-snug tracking-tight uppercase">
-            КОЛЬЦА, СОЗДАННЫЕ ВДОХНОВЕНИЕМ ПРИРОДЫ —
-            ТЕКСТУРАМИ ГОРНЫХ ПОРОД, КОРОЙ ДЕРЕВЬЕВ И ФОРМАМИ,
-            СОЗДАННЫМИ ВРЕМЕНЕМ
+            RINGS CREATED BY THE INSPIRATION OF NATURE —
+            TEXTURES OF ROCKS, BARK OF TREES, AND FORMS
+            CREATED BY TIME.
           </h2>
           <p className="text-[11px] uppercase tracking-[0.1em] opacity-60 max-w-md mx-auto leading-relaxed">
-            Мы использовали натуральные минералы и стремились сохранить в каждом кольце ощущение естественности и значимости
+            We use natural minerals and strive to preserve the feeling of naturalness and significance in every ring.
           </p>
         </div>
 
