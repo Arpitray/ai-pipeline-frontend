@@ -18,22 +18,20 @@ export default async function AddProductPage() {
     <div className="min-h-screen bg-celestique-cream relative">
       
       {/* Top bar */}
-      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-celestique-dark/10 bg-celestique-cream/80 backdrop-blur-xl px-12 py-8">
-        <div className="flex items-center gap-10">
-          <Link href="/dashboard/my-uploads" className="font-serif text-3xl italic tracking-tighter hover:text-[#FF1E1E] transition-colors">Celestique.</Link>
-          <div className="h-4 w-px bg-celestique-dark/20"></div>
-          <div className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF1E1E]">
-             REVE STUDIO
+      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-celestique-taupe bg-celestique-cream/90 backdrop-blur-md px-8 py-6">
+        <div className="flex items-center gap-6">
+          <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-celestique-dark hidden sm:block">
+            / UPLOAD STUDIO
           </div>
         </div>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4">
            <Link
              href="/dashboard/my-uploads"
-             className="text-[10px] uppercase tracking-[0.3em] font-bold text-celestique-dark/60 hover:text-celestique-dark transition-all duration-300"
+             className="text-[10px] uppercase tracking-[0.2em] font-bold text-celestique-dark/70 hover:text-celestique-dark border border-celestique-dark/15 hover:border-celestique-dark/40 px-4 py-2.5 transition-all duration-300"
            >
-             Archive
+             My Uploads
            </Link>
-           <span className="text-[9px] uppercase tracking-[0.2em] text-[#FF1E1E] font-bold border-l border-celestique-dark/10 pl-8 hidden lg:block">
+           <span className="text-[10px] uppercase tracking-[0.1em] text-celestique-dark/50 border-r border-celestique-taupe pr-4 hidden sm:block">
               {user.email}
            </span>
            <SignOutButton />

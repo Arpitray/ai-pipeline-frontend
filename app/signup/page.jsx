@@ -8,12 +8,9 @@ export const metadata = {
 export default function SignUpPage() {
   return (
     <AuthLayout
-      title="Create Account"
-      subtitle="JOIN OUR EXCLUSIVE NETWORK OF ARTISANS"
-      imageSrc="https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=2070&auto=format&fit=crop"
-      footerText="ALREADY REGISTERED?"
-      footerLink="/signin"
-      footerAction="SIGN IN"
+      title="Create an account"
+      subtitle="Showcase your designs, connect with verified retailers, and expand your business with confidence."
+      imageSrc="https://res.cloudinary.com/dsjjdnife/image/upload/v1771612613/101_k2qsju.png"
     >
       <SignUpForm />
     </AuthLayout>
