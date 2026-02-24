@@ -43,31 +43,33 @@ export default async function HomePage() {
       </header>
 
       {/* ── Hero Section ── */}
-      <section className="relative pt-12 pb-24 px-6 md:px-12 flex flex-col items-center">
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-12 overflow-hidden">
         
         {/* Massive Title */}
-        <div className="w-full text-center mb-12 relative z-10">
-          <h1 className="font-serif text-[18vw] leading-[0.75] tracking-tighter text-celestique-dark">
+        <div className="w-full text-center relative z-20 pointer-events-none">
+          <h1 className="font-serif text-[22vw] leading-none tracking-tighter text-celestique-dark mix-blend-darken">
             CELESTIQUE
           </h1>
         </div>
 
         {/* Hero Image Area */}
-        <div className="relative w-full max-w-3xl aspect-[4/3] md:aspect-[16/9] bg-celestique-taupe/20 -mt-16 md:-mt-32 z-0 flex items-center justify-center overflow-hidden">
-           <img 
-             src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
-             alt="Hero Jewelry" 
-             className="w-full h-full object-cover mix-blend-multiply"
-           />
+        <div className="absolute inset-0 w-full h-full z-10 flex items-center justify-center">
+           <div className="relative w-[90vw] h-[85vh] overflow-hidden">
+             <img 
+               src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
+               alt="Hero Jewelry" 
+               className="w-full h-full object-cover mix-blend-multiply transition-transform duration-1000 hover:scale-105"
+             />
+           </div>
         </div>
 
         {/* Sub-text below hero image */}
-        <div className="w-full max-w-[1400px] flex justify-between items-end mt-8 text-[10px] uppercase tracking-[0.1em] opacity-60">
-          <p className="max-w-[200px] leading-relaxed">
-            Handcrafted unique jewelry, with soul. Designed for the modern aesthetic.
+        <div className="absolute bottom-12 left-6 right-6 md:left-12 md:right-12 flex justify-between items-end z-30 text-[10px] uppercase tracking-[0.2em] font-medium text-celestique-dark/60">
+          <p className="max-w-[250px] leading-relaxed">
+            Handcrafted unique jewelry, with soul.<br/>Designed for the modern aesthetic.
           </p>
-          <Link href="#products" className="border-b border-current pb-0.5 hover:opacity-100 transition-opacity">
-            View Collection &rarr;
+          <Link href="#products" className="group flex items-center gap-4 border-b border-current pb-2 hover:text-celestique-dark transition-colors">
+            Discover the Collection <span className="text-lg transition-transform group-hover:translate-x-1">&rarr;</span>
           </Link>
         </div>
       </section>
