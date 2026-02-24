@@ -55,7 +55,7 @@ export default async function HomePage() {
         {/* Hero Image Area */}
         <div className="relative w-full max-w-3xl aspect-[4/3] md:aspect-[16/9] bg-celestique-taupe/20 -mt-16 md:-mt-32 z-0 flex items-center justify-center overflow-hidden">
            <img 
-             src="https://images.unsplash.com/photo-1605100804763-247f6612523e?q=80&w=2070&auto=format&fit=crop" 
+             src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
              alt="Hero Jewelry" 
              className="w-full h-full object-cover mix-blend-multiply"
            />
