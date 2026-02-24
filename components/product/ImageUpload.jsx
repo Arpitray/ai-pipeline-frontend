@@ -34,64 +34,61 @@ export function ImageUpload({ onFileChange }) {
 
   return (
     <div className="w-full h-full relative group">
-      <div 
-        className={`absolute -inset-0.5 bg-linear-to-r from-stone-200 to-stone-300 rounded-2xl blur opacity-30 transition duration-1000 group-hover:opacity-70 group-hover:duration-200 ${dragOver ? 'opacity-100 from-violet-400 to-indigo-400 blur-lg' : ''}`}></div>
-      
       <div
         onClick={() => inputRef.current?.click()}
         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
-        className={`relative flex min-h-[450px] w-full cursor-pointer flex-col items-center justify-center rounded-2xl bg-white transition-all duration-300 ease-out border-2 ${
+        className={`relative flex min-h-[450px] w-full cursor-pointer flex-col items-center justify-center bg-celestique-taupe/10 transition-all duration-300 ease-out border ${
           dragOver 
-            ? "border-violet-500 bg-violet-50/50 scale-[0.99] shadow-inner" 
-            : "border-stone-100 hover:border-stone-300 hover:bg-stone-50/30"
+            ? "border-celestique-dark bg-celestique-taupe/20" 
+            : "border-celestique-taupe hover:border-celestique-dark"
         }`}
       >
         {preview ? (
           <>
-            <div className="relative w-full h-full min-h-[450px] p-4 flex items-center justify-center overflow-hidden rounded-2xl">
+            <div className="relative w-full h-full min-h-[450px] p-8 flex items-center justify-center overflow-hidden">
               <img
                 src={preview}
                 alt="Preview"
-                className="max-h-[400px] w-auto object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105"
+                className="max-h-[400px] w-auto object-contain transition-transform duration-700 hover:scale-105 mix-blend-multiply"
               />
             </div>
             
             <button
               type="button"
               onClick={handleRemove}
-              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/90 backdrop-blur shadow-lg border border-stone-100 text-stone-600 hover:text-red-500 transition-all hover:scale-110 group-hover:opacity-100"
+              className="absolute top-6 right-6 z-20 p-3 bg-celestique-cream border border-celestique-dark text-celestique-dark hover:bg-celestique-dark hover:text-celestique-cream transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </button>
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-               <span className="bg-stone-900/80 backdrop-blur-md text-white text-xs font-medium px-4 py-2 rounded-full shadow-lg">
+            <div className="absolute bottom-8 left-0 right-0 flex justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+               <span className="bg-celestique-dark text-celestique-cream text-[9px] uppercase tracking-[0.2em] px-6 py-3">
                  Click or drop to replace
                </span>
             </div>
           </>
         ) : (
-          <div className="flex flex-col items-center gap-6 px-8 text-center max-w-sm mx-auto">
-            <div className={`h-24 w-24 rounded-full flex items-center justify-center transition-all duration-300 ${dragOver ? 'bg-violet-100 text-violet-600 scale-110' : 'bg-stone-50 text-stone-400 group-hover:bg-stone-100 group-hover:scale-110'}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 stroke-[1.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="flex flex-col items-center gap-8 px-8 text-center max-w-sm mx-auto">
+            <div className={`h-20 w-20 border border-celestique-dark flex items-center justify-center transition-all duration-500 ${dragOver ? 'bg-celestique-dark text-celestique-cream' : 'bg-transparent text-celestique-dark group-hover:bg-celestique-dark group-hover:text-celestique-cream'}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 stroke-[1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
-            <div className="space-y-3">
-              <p className="font-serif text-2xl text-stone-900 font-medium">
+            <div className="space-y-4">
+              <p className="font-serif text-2xl text-celestique-dark">
                 Upload Product Photo
               </p>
-              <p className="text-stone-500 font-light text-base leading-relaxed">
+              <p className="text-celestique-dark/60 text-xs uppercase tracking-[0.1em] leading-relaxed">
                 Drag & drop your jewelry piece here, or click to browse files.
               </p>
             </div>
-            <div className="flex items-center gap-3 pt-4">
-               <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase py-1 px-2 border border-stone-200 rounded">JPG</span>
-               <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase py-1 px-2 border border-stone-200 rounded">PNG</span>
-               <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase py-1 px-2 border border-stone-200 rounded">WEBP</span>
+            <div className="flex items-center gap-4 pt-6">
+               <span className="text-[9px] tracking-[0.2em] text-celestique-dark uppercase py-1.5 px-3 border border-celestique-taupe">JPG</span>
+               <span className="text-[9px] tracking-[0.2em] text-celestique-dark uppercase py-1.5 px-3 border border-celestique-taupe">PNG</span>
+               <span className="text-[9px] tracking-[0.2em] text-celestique-dark uppercase py-1.5 px-3 border border-celestique-taupe">WEBP</span>
             </div>
           </div>
         )}

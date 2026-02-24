@@ -55,8 +55,8 @@ export function SelectRoleForm() {
   }
 
   return (
-    <div className="w-full space-y-6">
-      <div className="grid gap-4">
+    <div className="w-full space-y-8">
+      <div className="grid gap-6">
         {roles.map((role) => {
           const isSelected = selected === role.value;
           return (
@@ -65,35 +65,35 @@ export function SelectRoleForm() {
               type="button"
               onClick={() => setSelected(role.value)}
               className={`
-                relative w-full text-left flex items-start gap-4 p-5 rounded-2xl border-2 transition-all duration-200
+                relative w-full text-left flex items-start gap-6 p-6 border transition-all duration-300
                 ${isSelected
-                  ? "border-amber-500 bg-amber-50 shadow-md"
-                  : "border-stone-200 bg-white hover:border-stone-300 hover:bg-stone-50"}
+                  ? "border-celestique-dark bg-celestique-taupe/10"
+                  : "border-celestique-taupe bg-transparent hover:border-celestique-dark/50 hover:bg-celestique-taupe/5"}
               `}
             >
               {/* Radio indicator */}
               <div
                 className={`
-                  mt-0.5 shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors
-                  ${isSelected ? "border-amber-500 bg-amber-500" : "border-stone-300 bg-white"}
+                  mt-1 shrink-0 w-4 h-4 border flex items-center justify-center transition-colors
+                  ${isSelected ? "border-celestique-dark bg-celestique-dark" : "border-celestique-taupe bg-transparent"}
                 `}
               >
                 {isSelected && (
-                  <span className="w-2 h-2 rounded-full bg-white inline-block" />
+                  <span className="w-1.5 h-1.5 bg-celestique-cream inline-block" />
                 )}
               </div>
 
               {/* Icon */}
-              <div className={`shrink-0 p-2 rounded-xl ${isSelected ? "bg-amber-100 text-amber-700" : "bg-stone-100 text-stone-500"}`}>
+              <div className={`shrink-0 p-3 border ${isSelected ? "border-celestique-dark text-celestique-dark" : "border-celestique-taupe text-celestique-dark/60"}`}>
                 {role.icon}
               </div>
 
               {/* Text */}
-              <div>
-                <p className={`font-semibold text-sm ${isSelected ? "text-amber-800" : "text-stone-800"}`}>
+              <div className="pt-1">
+                <p className={`font-serif text-lg ${isSelected ? "text-celestique-dark" : "text-celestique-dark/80"}`}>
                   {role.label}
                 </p>
-                <p className="text-xs text-stone-500 mt-0.5 leading-relaxed">
+                <p className="font-sans text-[11px] uppercase tracking-[0.1em] text-celestique-dark/60 mt-2 leading-relaxed">
                   {role.description}
                 </p>
               </div>
@@ -103,7 +103,7 @@ export function SelectRoleForm() {
       </div>
 
       {error && (
-        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+        <p className="font-sans text-[10px] uppercase tracking-[0.1em] text-red-800 bg-red-50 border border-red-200 px-4 py-3 text-center">
           {error}
         </p>
       )}
@@ -113,13 +113,13 @@ export function SelectRoleForm() {
         onClick={handleConfirm}
         disabled={loading || !selected}
         className={`
-          w-full py-3.5 rounded-xl font-semibold text-sm transition-all duration-200
+          w-full py-4 font-sans text-[11px] uppercase tracking-[0.2em] transition-all duration-300 border
           ${selected && !loading
-            ? "bg-amber-500 hover:bg-amber-600 text-white shadow-md hover:shadow-lg"
-            : "bg-stone-100 text-stone-400 cursor-not-allowed"}
+            ? "bg-celestique-dark text-celestique-cream border-celestique-dark hover:bg-celestique-dark/90"
+            : "bg-transparent text-celestique-dark/40 border-celestique-taupe cursor-not-allowed"}
         `}
       >
-        {loading ? "Setting up your account…" : "Continue →"}
+        {loading ? "Setting up..." : "Continue"}
       </button>
     </div>
   );

@@ -2,7 +2,7 @@ import { AuthLayout } from "../../components/auth/AuthLayout";
 import { SignUpForm } from "../../components/auth/SignUpForm";
 
 export const metadata = {
-  title: "Sign Up — Jeweller",
+  title: "Sign Up — Celestique",
 };
 
 export default function SignUpPage() {

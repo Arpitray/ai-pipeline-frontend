@@ -6,11 +6,11 @@ export function Input({
   ...props
 }) {
   return (
-    <div className="flex flex-col gap-2 w-full group">
+    <div className="flex flex-col gap-3 w-full group">
       {label && (
         <label
           htmlFor={id}
-          className="text-sm font-semibold text-stone-700 transition-colors group-focus-within:text-stone-900"
+          className="text-[10px] uppercase tracking-[0.2em] text-celestique-dark/60 transition-colors group-focus-within:text-celestique-dark"
         >
           {label}
         </label>
@@ -18,7 +18,7 @@ export function Input({
       <input
         id={id}
         type={type}
-        className="flex h-14 w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-base text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-900/10 focus:border-stone-400 focus:bg-white transition-all duration-200 ease-out shadow-sm hover:border-stone-300 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex h-12 w-full border-b border-celestique-taupe bg-transparent px-0 py-2 text-sm text-celestique-dark placeholder:text-celestique-dark/30 focus:outline-none focus:border-celestique-dark transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50"
         placeholder={placeholder}
         {...props}
       />

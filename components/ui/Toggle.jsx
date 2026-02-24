@@ -4,7 +4,7 @@ export function Toggle({ id, label, checked, onChange }) {
   return (
     <div className="flex items-center justify-between group">
       {label && (
-        <label htmlFor={id} className="text-sm font-semibold text-stone-700 transition-colors group-hover:text-stone-900 cursor-pointer" onClick={() => onChange(!checked)}>
+        <label htmlFor={id} className="text-[10px] uppercase tracking-[0.2em] text-celestique-dark/60 transition-colors group-hover:text-celestique-dark cursor-pointer" onClick={() => onChange(!checked)}>
           {label}
         </label>
       )}
@@ -14,12 +14,12 @@ export function Toggle({ id, label, checked, onChange }) {
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-stone-900 focus:ring-offset-2 ${
-          checked ? "bg-stone-900" : "bg-stone-200 hover:bg-stone-300"
+        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-transparent transition-colors duration-300 ease-in-out focus:outline-none ${
+          checked ? "bg-celestique-dark" : "bg-celestique-taupe hover:bg-celestique-taupe/80"
         }`}
       >
         <span
-          className={`pointer-events-none inline-block h-6 w-6 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+          className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-celestique-cream shadow-sm ring-0 transition duration-300 ease-in-out ${
             checked ? "translate-x-5" : "translate-x-0"
           }`}
         />

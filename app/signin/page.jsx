@@ -2,7 +2,7 @@ import { AuthLayout } from "../../components/auth/AuthLayout";
 import { SignInForm } from "../../components/auth/SignInForm";
 
 export const metadata = {
-  title: "Sign In — Jeweller",
+  title: "Sign In — Celestique",
 };
 
 export default function SignInPage() {

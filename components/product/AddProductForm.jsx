@@ -167,27 +167,24 @@ export function AddProductForm() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto rounded-3xl bg-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-stone-100 overflow-hidden">
+    <div className="max-w-5xl mx-auto bg-celestique-cream border border-celestique-taupe">
       
-      {/* Header with gradient subtle bg */}
-      <div className="relative px-8 py-10 md:px-12 md:py-12 bg-linear-to-b from-stone-50 to-white border-b border-stone-100">
-        <h2 className="text-3xl font-serif text-stone-900 tracking-tight">Add New Product</h2>
-        <p className="text-stone-500 mt-2 text-lg font-light">Enter the details below to create a sparkling new listing.</p>
-        
-        {/* Decorative element */}
-        <div className="absolute top-0 right-0 w-64 h-full bg-[radial-gradient(circle_at_top_right,var(--tw-gradient-stops))] from-amber-50/40 via-transparent to-transparent pointer-events-none"></div>
+      {/* Header */}
+      <div className="px-8 py-12 md:px-16 md:py-16 border-b border-celestique-taupe text-center">
+        <h2 className="text-4xl md:text-5xl font-serif text-celestique-dark tracking-tight">Add New Product</h2>
+        <p className="text-celestique-dark/60 mt-4 text-sm uppercase tracking-[0.2em]">Enter the details below to create a new listing</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-8 md:p-12 space-y-16">
+      <form onSubmit={handleSubmit} className="p-8 md:p-16 space-y-20">
         
         {/* Section: Media */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-           <div className="lg:col-span-4 space-y-2">
-             <h3 className="text-lg font-semibold text-stone-900 flex items-center gap-2">
-               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-bold">1</span>
+           <div className="lg:col-span-4 space-y-4">
+             <h3 className="text-xl font-serif text-celestique-dark flex items-center gap-3">
+               <span className="text-sm font-sans uppercase tracking-[0.2em] text-celestique-dark/40">01</span>
                Product Image
              </h3>
-             <p className="text-sm text-stone-500 leading-relaxed">
+             <p className="text-xs uppercase tracking-[0.1em] text-celestique-dark/60 leading-relaxed">
                Upload a high-quality image. Our AI will automatically enhance it and remove the background.
              </p>
            </div>
@@ -196,21 +193,21 @@ export function AddProductForm() {
            </div>
         </div>
 
-        <div className="h-px w-full bg-stone-100"></div>
+        <div className="h-px w-full bg-celestique-taupe"></div>
 
         {/* Section: Basic Info */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4 space-y-2">
-             <h3 className="text-lg font-semibold text-stone-900 flex items-center gap-2">
-               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-bold">2</span>
+          <div className="lg:col-span-4 space-y-4">
+             <h3 className="text-xl font-serif text-celestique-dark flex items-center gap-3">
+               <span className="text-sm font-sans uppercase tracking-[0.2em] text-celestique-dark/40">02</span>
                Essential Details
              </h3>
-             <p className="text-sm text-stone-500 leading-relaxed">
+             <p className="text-xs uppercase tracking-[0.1em] text-celestique-dark/60 leading-relaxed">
                Define the core identity of your jewelry piece.
              </p>
           </div>
           
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-8 space-y-10">
             <div className="space-y-6">
               <Input
                 id="title"
@@ -224,7 +221,7 @@ export function AddProductForm() {
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               <Select
                 id="jewellery_type"
                 label="Type"
@@ -241,7 +238,7 @@ export function AddProductForm() {
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               <Select
                 id="style"
                 label="Style Aesthetic"
@@ -249,7 +246,7 @@ export function AddProductForm() {
                 value={form.style}
                 onChange={(e) => setField("style", e.target.value)}
               />
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <Select
                   id="size"
                   label="Size"
@@ -269,23 +266,23 @@ export function AddProductForm() {
           </div>
         </div>
 
-        <div className="h-px w-full bg-stone-100"></div>
+        <div className="h-px w-full bg-celestique-taupe"></div>
 
         {/* Section: Specifications */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4 space-y-2">
-             <h3 className="text-lg font-semibold text-stone-900 flex items-center gap-2">
-               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-bold">3</span>
+          <div className="lg:col-span-4 space-y-4">
+             <h3 className="text-xl font-serif text-celestique-dark flex items-center gap-3">
+               <span className="text-sm font-sans uppercase tracking-[0.2em] text-celestique-dark/40">03</span>
                Specifications
              </h3>
-             <p className="text-sm text-stone-500 leading-relaxed">
+             <p className="text-xs uppercase tracking-[0.1em] text-celestique-dark/60 leading-relaxed">
                Precise measurements and inventory details.
              </p>
           </div>
 
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-8 space-y-10">
             {/* Weights */}
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 bg-stone-50/50 p-6 rounded-2xl border border-stone-100">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 bg-celestique-taupe/10 p-8 border border-celestique-taupe">
               <InputWithSuffix
                 id="netWeight"
                 label="Net Weight"
@@ -321,10 +318,10 @@ export function AddProductForm() {
               />
             </div>
 
-            <div className="flex items-center justify-between p-5 rounded-xl border border-blue-100 bg-linear-to-r from-blue-50/80 to-indigo-50/80">
-              <div className="flex flex-col gap-1">
-                  <span className="text-stone-900 font-medium">Available in Stock</span>
-                  <span className="text-xs text-stone-500">Is this piece ready for immediate shipment?</span>
+            <div className="flex items-center justify-between p-6 border border-celestique-taupe bg-celestique-taupe/5">
+              <div className="flex flex-col gap-2">
+                  <span className="text-xs uppercase tracking-[0.2em] text-celestique-dark">Available in Stock</span>
+                  <span className="text-[10px] uppercase tracking-[0.1em] text-celestique-dark/60">Is this piece ready for immediate shipment?</span>
               </div>
               <Toggle
                 id="stockAvailable"
@@ -335,7 +332,7 @@ export function AddProductForm() {
             </div>
 
             {!form.stockAvailable && (
-              <div className="animate-scaleIn origin-top">
+              <div className="animate-fade-in">
                   <InputWithSuffix
                     id="makeToOrderDays"
                     label="Production Time"
@@ -354,31 +351,27 @@ export function AddProductForm() {
 
         {/* Error */}
         {error && (
-          <div className="rounded-xl border border-red-100 bg-red-50/50 p-4 animate-scaleIn">
-            <div className="flex items-center gap-3">
-               <div className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-red-100 text-red-600">
-                 <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                 </svg>
+          <div className="border border-red-200 bg-red-50 p-6 animate-fade-in">
+            <div className="flex items-center gap-4">
+               <div className="shrink-0 w-10 h-10 flex items-center justify-center border border-red-200 text-red-600">
+                 !
                </div>
                <div>
-                 <h3 className="text-sm font-medium text-red-900">Submission Error</h3>
-                 <p className="text-sm text-red-700 mt-0.5">{error}</p>
+                 <h3 className="text-xs uppercase tracking-[0.2em] text-red-900">Submission Error</h3>
+                 <p className="text-sm text-red-700 mt-1">{error}</p>
                </div>
             </div>
           </div>
         )}
 
         {/* Submit */}
-        <div className="pt-8 border-t border-stone-100 flex justify-end">
+        <div className="pt-12 border-t border-celestique-taupe flex justify-end">
           <button
             type="submit"
-            className="group relative inline-flex items-center justify-center gap-3 h-14 px-8 rounded-full bg-stone-900 text-white text-lg font-medium shadow-xl hover:bg-stone-800 transition-all hover:scale-[1.02] hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-stone-200"
+            className="group relative inline-flex items-center justify-center gap-4 px-10 py-4 bg-celestique-dark text-celestique-cream text-xs uppercase tracking-[0.2em] hover:bg-celestique-dark/90 transition-colors"
           >
             <span>Create Product</span>
-            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+            <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
           </button>
         </div>
       </form>
