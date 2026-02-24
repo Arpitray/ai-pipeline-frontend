@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,61 +15,77 @@ export function Hero() {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    // Critical for performance when dealing with high-frequency scroll events
-    gsap.ticker.lagSmoothing(0);
+    // ── Lenis smooth scroll ──────────────────────────────────────────────
+    // Lenis lerps the raw scroll position so GSAP always receives a
+    // smoothly-changing value instead of the raw jerky browser scroll.
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      smoothWheel: true,
+    });
 
+    // Feed Lenis into GSAP's ticker — both run on the same RAF loop.
+    // lagSmoothing(0) stops GSAP from trying to "big-catch-up" after a
+    // dropped frame, which is what causes the visible jank/lag.
+    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+
+    // Tell ScrollTrigger to update whenever Lenis fires a scroll event.
+    lenis.on("scroll", ScrollTrigger.update);
+
+    // ── GSAP animation ───────────────────────────────────────────────────
     const ctx = gsap.context(() => {
-      // Create a timeline for the hero scroll interaction
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=100%", // Fast, snappy scroll
-          scrub: true,   // Direct coupling is often smoother on heavy DOMs
-          pin: true,     
-          force3D: true, // Force GPU usage
+          end: "+=120%",
+          // scrub: true = instant 1:1 tracking — the smoothness comes from
+          // Lenis, NOT from a scrub delay value.
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
-      // NO filters, NO complex blending during animation
-      tl.fromTo(imageRef.current, 
-        { 
-          clipPath: "inset(24% 18% 24% 18% round 40px)",
-          scale: 0.85,
-        },
-        {
-          clipPath: "inset(0% 0% 0% 0% round 0px)",
-          scale: 1,
-          ease: "power2.out",
-        }
+      // clip-path is composited entirely on the GPU — no layout recalc.
+      tl.fromTo(
+        imageRef.current,
+        { clipPath: "inset(20% 15% 20% 15% round 32px)", scale: 0.9 },
+        { clipPath: "inset(0% 0% 0% 0% round 0px)", scale: 1, ease: "none" }
       )
       .to(titleRef.current, {
-        scale: 1.8,
+        scale: 1.5,
         opacity: 0,
-        y: -100, // Move it up instead of blurring
-        duration: 0.5,
-      }, 0) 
+        filter: "blur(20px)",
+        ease: "none",
+      }, 0)
       .to(contentRef.current, {
         opacity: 0,
-        y: 80,
-        duration: 0.3,
-      }, 0);
-
-      // Parallax on the image without using expensive filters
-      tl.to(imageRef.current.querySelector("img"), {
-        scale: 1.15,
+        y: 50,
         ease: "none",
-      }, 0);
-
+      }, 0)
+      .fromTo(
+        imageRef.current.querySelector("img"),
+        { scale: 1 },
+        { scale: 1.15, ease: "none" },
+        0
+      );
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      lenis.destroy();
+    };
   }, []);
 
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full h-screen flex items-center justify-center bg-celestique-cream overflow-hidden"
+      className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-celestique-cream"
     >
       {/* Massive Title - Vibrant Red */}
       <div 
@@ -80,7 +97,7 @@ export function Hero() {
         </h1>
       </div>
 
-      {/* Hero Image Area - Optimized for GPU */}
+      {/* Hero Image Area - Controlled by clip-path for performance */}
       <div 
         ref={imageRef} 
         className="absolute inset-0 z-10 overflow-hidden bg-celestique-taupe/10 will-change-[clip-path,transform]"
@@ -88,7 +105,7 @@ export function Hero() {
          <img 
            src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
            alt="Hero Jewelry" 
-           className="w-full h-full object-cover opacity-90 will-change-transform"
+           className="w-full h-full object-cover mix-blend-multiply opacity-90 will-change-transform"
          />
       </div>
 
