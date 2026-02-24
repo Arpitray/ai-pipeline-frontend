@@ -14,49 +14,49 @@ export function Hero() {
   const contentRef = useRef(null);
 
   useEffect(() => {
+    // Critical for performance when dealing with high-frequency scroll events
+    gsap.ticker.lagSmoothing(0);
+
     const ctx = gsap.context(() => {
       // Create a timeline for the hero scroll interaction
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=120%", // Slightly shorter to feel faster
-          scrub: 0.5,     // Snappier scrub
-          pin: true,     // Pin the section while animating
-          anticipatePin: 1,
+          end: "+=100%", // Fast, snappy scroll
+          scrub: true,   // Direct coupling is often smoother on heavy DOMs
+          pin: true,     
+          force3D: true, // Force GPU usage
         },
       });
 
-      // Using clip-path is significantly more performant than width/height
-      // Initial state: inset card
-      // Final state: full screen
+      // NO filters, NO complex blending during animation
       tl.fromTo(imageRef.current, 
         { 
-          clipPath: "inset(20% 15% 20% 15% round 32px)",
-          scale: 0.9,
+          clipPath: "inset(24% 18% 24% 18% round 40px)",
+          scale: 0.85,
         },
         {
           clipPath: "inset(0% 0% 0% 0% round 0px)",
           scale: 1,
-          duration: 1,
-          ease: "none",
+          ease: "power2.out",
         }
       )
       .to(titleRef.current, {
-        scale: 1.5,
+        scale: 1.8,
         opacity: 0,
-        filter: "blur(20px)",
+        y: -100, // Move it up instead of blurring
         duration: 0.5,
-      }, 0) // Title disappears quickly as image grows
+      }, 0) 
       .to(contentRef.current, {
         opacity: 0,
-        y: 50,
-        duration: 0.4,
+        y: 80,
+        duration: 0.3,
       }, 0);
 
-      // Simple parallax on the image internal
+      // Parallax on the image without using expensive filters
       tl.to(imageRef.current.querySelector("img"), {
-        scale: 1.2,
+        scale: 1.15,
         ease: "none",
       }, 0);
 
@@ -68,7 +68,7 @@ export function Hero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-celestique-cream"
+      className="relative w-full h-screen flex items-center justify-center bg-celestique-cream overflow-hidden"
     >
       {/* Massive Title - Vibrant Red */}
       <div 
@@ -80,7 +80,7 @@ export function Hero() {
         </h1>
       </div>
 
-      {/* Hero Image Area - Controlled by clip-path for performance */}
+      {/* Hero Image Area - Optimized for GPU */}
       <div 
         ref={imageRef} 
         className="absolute inset-0 z-10 overflow-hidden bg-celestique-taupe/10 will-change-[clip-path,transform]"
@@ -88,7 +88,7 @@ export function Hero() {
          <img 
            src="https://i.pinimg.com/1200x/6b/3e/df/6b3edf04c585bf6fd426457f7ea8c51b.jpg" 
            alt="Hero Jewelry" 
-           className="w-full h-full object-cover mix-blend-multiply opacity-90 will-change-transform"
+           className="w-full h-full object-cover opacity-90 will-change-transform"
          />
       </div>
 
