@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { ProductDetailModal } from "./ProductDetailModal";
 
 // ── Skeleton placeholder (matches card proportions exactly) ────────────────
 export function ProductCardSkeleton() {
   return (
     <article className="flex flex-col">
       {/* Image skeleton */}
-      <div className="relative aspect-[4/5] w-full mb-6 skeleton-shimmer" />
+      <div className="relative aspect-4/5 w-full mb-6 skeleton-shimmer" />
       {/* Title/category row skeleton */}
       <div className="flex items-center justify-between border-b border-celestique-dark/10 pb-2 mt-2 gap-4">
         <div className="h-2 w-2/3 skeleton-shimmer" />
@@ -24,13 +25,14 @@ export function ProductCard({ product, index = 0 }) {
   const [imgLoaded,   setImgLoaded]   = useState(false);
   const [imgError,    setImgError]    = useState(false);
   const [variantIdx,  setVariantIdx]  = useState(0);
+  const [modalOpen,   setModalOpen]   = useState(false);
   const cardRef = useRef(null);
 
-  // Build variant list
+  // Build variant list — prefer generated variants, then processed, then raw
   const variants =
     Array.isArray(product.generated_image_urls) && product.generated_image_urls.length > 0
       ? product.generated_image_urls
-      : [product.image_url || product.processed_image_url || product.raw_image_url].filter(Boolean);
+      : [product.processed_image_url || product.image_url || product.raw_image_url].filter(Boolean);
 
   const hasMultiple = variants.length > 1;
   const activeUrl   = variants[variantIdx] ?? null;
@@ -68,10 +70,19 @@ export function ProductCard({ product, index = 0 }) {
   }, [index]);
 
   return (
-    <article ref={cardRef} className="group flex flex-col card-enter">
+    <>
+    <article
+      ref={cardRef}
+      className="group flex flex-col card-enter cursor-pointer"
+      onClick={() => setModalOpen(true)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setModalOpen(true); }}
+      aria-label={`View details for ${product.title || product.jewellery_type || "jewellery piece"}`}
+    >
 
       {/* ── Image container ── */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden mb-6">
+      <div className="relative aspect-4/5 w-full overflow-hidden mb-6">
 
         {/* Shimmer skeleton — visible until image finishes loading */}
         {activeUrl && !imgError && !imgLoaded && (
@@ -100,9 +111,16 @@ export function ProductCard({ product, index = 0 }) {
           </div>
         )}
 
+        {/* VIEW overlay — appears on hover to hint at clickability */}
+        <div className="absolute inset-0 z-10 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <span className="text-[9px] uppercase tracking-[0.3em] font-bold bg-celestique-dark text-celestique-cream px-4 py-2">
+            View Details
+          </span>
+        </div>
+
         {/* Stock badge — only after image loads to avoid floating on skeleton */}
         {imgLoaded && (
-          <div className="absolute top-4 left-4">
+          <div className="absolute top-4 left-4 z-20">
             {product.stock_available ? (
               <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-celestique-dark bg-celestique-cream/85 backdrop-blur-md px-3 py-1.5">
                 In Stock
@@ -115,17 +133,17 @@ export function ProductCard({ product, index = 0 }) {
           </div>
         )}
 
-        {/* Variant navigation */}
+        {/* Variant navigation — stop propagation so clicking arrows doesn't open modal */}
         {hasMultiple && (
           <>
-            <button onClick={prev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-celestique-cream/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-celestique-cream text-celestique-dark"
+            <button onClick={(e) => { e.stopPropagation(); prev(e); }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-celestique-cream/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-celestique-cream text-celestique-dark z-20"
               aria-label="Previous variant"
             >
               &larr;
             </button>
-            <button onClick={next}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-celestique-cream/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-celestique-cream text-celestique-dark"
+            <button onClick={(e) => { e.stopPropagation(); next(e); }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-celestique-cream/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-celestique-cream text-celestique-dark z-20"
               aria-label="Next variant"
             >
               &rarr;
@@ -134,7 +152,7 @@ export function ProductCard({ product, index = 0 }) {
               {variants.map((_, i) => (
                 <button
                   key={i}
-                  onClick={(e) => { e.preventDefault(); setVariantIdx(i); setImgLoaded(false); setImgError(false); }}
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); setVariantIdx(i); setImgLoaded(false); setImgError(false); }}
                   className={`w-1.5 h-1.5 transition-colors ${
                     i === variantIdx ? "bg-celestique-dark" : "bg-celestique-dark/30 hover:bg-celestique-dark/60"
                   }`}
@@ -148,7 +166,7 @@ export function ProductCard({ product, index = 0 }) {
 
       {/* ── Text meta ── */}
       <div className="flex items-center justify-between border-b border-celestique-dark/10 pb-2 mt-2">
-        <h3 className="font-sans text-[10px] uppercase tracking-[0.1em] font-bold text-celestique-dark line-clamp-1">
+        <h3 className="font-sans text-[10px] uppercase tracking-widest font-bold text-celestique-dark line-clamp-1">
           {product.title ||
             `${
               product.jewellery_type
@@ -156,16 +174,21 @@ export function ProductCard({ product, index = 0 }) {
                 : "Jewellery"
             } Piece`}
         </h3>
-        <div className="text-[10px] uppercase tracking-[0.1em] text-celestique-dark/50 shrink-0 ml-2">
+        <div className="text-[10px] uppercase tracking-widest text-celestique-dark/50 shrink-0 ml-2">
           {product.category || ""}
         </div>
       </div>
 
       {product.wholesaler_email && (
-        <p className="text-[9px] tracking-[0.1em] uppercase text-celestique-dark/35 mt-2">
+        <p className="text-[9px] tracking-widest uppercase text-celestique-dark/35 mt-2">
           By {product.wholesaler_email.split("@")[0]}
         </p>
       )}
     </article>
+
+    {modalOpen && (
+      <ProductDetailModal product={product} onClose={() => setModalOpen(false)} />
+    )}
+    </>
   );
 }
