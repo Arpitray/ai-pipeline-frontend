@@ -235,9 +235,12 @@ export function ProcessingView({ status, bgRemovedUrl, variantUrls = [], onReset
                 ))}
                 <button
                   onClick={onReset}
-                  className="ml-4 px-6 py-3 bg-celestique-dark text-celestique-cream text-[10px] uppercase tracking-[0.2em] hover:bg-celestique-dark/90 transition-colors"
+                  className="ml-4 px-8 py-4 bg-celestique-dark text-celestique-cream text-[11px] uppercase tracking-widest font-bold hover:bg-celestique-dark/90 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-3"
                 >
-                  Add Another
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  Add Another Product
                 </button>
               </div>
             </>

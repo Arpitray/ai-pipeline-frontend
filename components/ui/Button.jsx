@@ -3,15 +3,16 @@ export function Button({
   variant = "primary",
   children,
   className = "",
+  loading = false,
   ...props
 }) {
   const baseStyles =
-    "inline-flex items-center justify-center text-[10px] uppercase tracking-[0.2em] transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 h-12 px-8 w-full";
+    "group relative inline-flex items-center justify-center text-[11px] uppercase tracking-widest font-bold transition-all focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 h-14 px-10 w-full shadow-sm active:translate-y-0.5";
   
   const variants = {
-    primary: "bg-celestique-dark text-celestique-cream hover:bg-celestique-dark/90",
+    primary: "bg-celestique-dark text-celestique-cream hover:bg-celestique-dark/90 hover:shadow-md",
     outline:
-      "border border-celestique-dark bg-transparent text-celestique-dark hover:bg-celestique-dark hover:text-celestique-cream",
+      "border-2 border-celestique-dark bg-transparent text-celestique-dark hover:bg-celestique-dark hover:text-celestique-cream hover:shadow-md",
     ghost: "hover:bg-celestique-taupe/20 text-celestique-dark",
   };
 
@@ -19,9 +20,18 @@ export function Button({
     <button
       type={type}
       className={`${baseStyles} ${variants[variant]} ${className}`}
+      disabled={loading || props.disabled}
       {...props}
     >
-      {children}
+      <span className={`transition-all duration-300 flex items-center justify-center gap-3 ${loading ? "opacity-0 invisible" : "opacity-100 visible"}`}>
+        {children}
+        {type === "submit" && <span className="transition-transform group-hover:translate-x-1">&rarr;</span>}
+      </span>
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-5 h-5 border-2 border-celestique-taupe border-t-celestique-cream rounded-full animate-spin" />
+        </div>
+      )}
     </button>
   );
 }

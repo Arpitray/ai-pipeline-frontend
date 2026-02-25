@@ -55,7 +55,7 @@ export function SignUpForm() {
 
       {/* ── Role selector ── */}
       <div className="space-y-4">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-celestique-dark/60">I am a…</p>
+        <p className="text-[10px] uppercase tracking-widest font-bold text-celestique-dark/60">I am a…</p>
         <div className="grid grid-cols-2 gap-4">
           {ROLES.map((r) => {
             const isSelected = role === r.value;
@@ -65,17 +65,17 @@ export function SignUpForm() {
                 type="button"
                 onClick={() => setRole(r.value)}
                 className={`
-                  flex flex-col items-center gap-2 py-6 px-4 border transition-all text-center
+                  flex flex-col items-center gap-2 py-8 px-4 border-2 transition-all duration-300 text-center relative
                   ${isSelected
-                    ? "border-celestique-dark bg-celestique-taupe/20"
-                    : "border-celestique-taupe bg-transparent hover:border-celestique-dark"}
+                    ? "border-celestique-dark bg-celestique-taupe/10 shadow-md"
+                    : "border-celestique-taupe/40 bg-transparent hover:border-celestique-dark/50 hover:bg-celestique-taupe/5"}
                 `}
               >
-                <span className="text-2xl opacity-80">{r.icon}</span>
-                <span className={`text-[10px] uppercase tracking-[0.2em] ${isSelected ? "text-celestique-dark" : "text-celestique-dark/80"}`}>
+                <span className={`text-3xl mb-1 ${isSelected ? "opacity-100" : "opacity-40"}`}>{r.icon}</span>
+                <span className={`text-[11px] uppercase tracking-widest font-bold ${isSelected ? "text-celestique-dark" : "text-celestique-dark/80"}`}>
                   {r.label}
                 </span>
-                <span className="text-[9px] uppercase tracking-[0.1em] text-celestique-dark/40">{r.hint}</span>
+                <span className="text-[9px] uppercase tracking-widest text-celestique-dark/40 font-medium">{r.hint}</span>
               </button>
             );
           })}
@@ -103,13 +103,13 @@ export function SignUpForm() {
       </div>
 
       {error && (
-        <p className="text-[10px] uppercase tracking-[0.1em] text-red-600 bg-red-50 border border-red-200 px-4 py-3">
+        <p className="text-[10px] uppercase tracking-widest font-bold text-red-600 bg-red-50 border border-red-200 px-4 py-3 animate-fade-in">
           {error}
         </p>
       )}
 
-      <Button type="submit" variant="primary" disabled={loading}>
-        {loading ? "Creating account…" : "Sign Up"}
+      <Button type="submit" variant="primary" loading={loading}>
+        Create Account
       </Button>
 
       <div className="relative">

@@ -74,8 +74,8 @@ export function SignInForm() {
         </p>
       )}
 
-      <Button type="submit" variant="primary" disabled={loading}>
-        {loading ? "Signing in…" : "Sign In"}
+      <Button type="submit" variant="primary" loading={loading}>
+        Sign In
       </Button>
 
       <div className="relative">

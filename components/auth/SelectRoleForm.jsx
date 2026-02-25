@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { setUserRole } from "../../lib/actions/role";
+import { Button } from "../ui/Button";
 
 const roles = [
   {
@@ -108,19 +108,13 @@ export function SelectRoleForm() {
         </p>
       )}
 
-      <button
-        type="button"
+      <Button
         onClick={handleConfirm}
-        disabled={loading || !selected}
-        className={`
-          w-full py-4 font-sans text-[11px] uppercase tracking-[0.2em] transition-all duration-300 border
-          ${selected && !loading
-            ? "bg-celestique-dark text-celestique-cream border-celestique-dark hover:bg-celestique-dark/90"
-            : "bg-transparent text-celestique-dark/40 border-celestique-taupe cursor-not-allowed"}
-        `}
+        loading={loading}
+        disabled={!selected}
       >
-        {loading ? "Setting up..." : "Continue"}
-      </button>
+        Complete Selection
+      </Button>
     </div>
   );
 }

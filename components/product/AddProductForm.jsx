@@ -364,17 +364,30 @@ export function AddProductForm() {
           </div>
         )}
 
-        {/* Submit */}
-        <div className="pt-12 border-t border-celestique-taupe flex justify-end">
-          <button
-            type="submit"
-            className="group relative inline-flex items-center justify-center gap-4 px-10 py-4 bg-celestique-dark text-celestique-cream text-xs uppercase tracking-[0.2em] hover:bg-celestique-dark/90 transition-colors"
-          >
-            <span>Create Product</span>
-            <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
-          </button>
+        {/* Submit - Sticky Footer */}
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-celestique-cream/95 backdrop-blur-md border-t border-celestique-dark/10 p-4 md:p-6 flex justify-center md:justify-end shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+          <div className="w-full max-w-5xl mx-auto flex items-center justify-between px-4 md:px-8">
+            <div className="hidden md:block">
+              <p className="text-[10px] uppercase tracking-widest text-celestique-dark/60 font-bold">
+                Ready to process?
+              </p>
+              <p className="text-sm font-serif italic text-celestique-dark mt-1">
+                Our AI will remove the background and generate 4 variants.
+              </p>
+            </div>
+            <button
+              type="submit"
+              className="w-full md:w-auto group relative inline-flex items-center justify-center gap-4 px-12 py-5 bg-celestique-dark text-celestique-cream text-[11px] uppercase tracking-widest font-bold hover:bg-celestique-dark/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Process & Create Product</span>
+              <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
+            </button>
+          </div>
         </div>
       </form>
+      
+      {/* Spacer to prevent footer overlap */}
+      <div className="h-24"></div>
     </div>
   );
 }
