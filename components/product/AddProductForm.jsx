@@ -127,11 +127,16 @@ export function AddProductForm() {
         gross_weight:       form.grossWeight || null,
         stone_weight:       form.stoneWeight || null,
         raw_image_url:      raw || null,
+        // Pass variant URLs so saveProduct can write them as a safety net
+        // if the backend somehow hadn't stored them yet
+        processed_image_url:  variants?.[0] || null,
+        generated_image_urls: variants?.length ? variants : null,
       });
 
       if (saveResult?.error) {
-        // Non-blocking — product was processed, just log the save error
         console.error("[saveProduct]", saveResult.error);
+        // Surface to user so they know the metadata wasn't saved
+        setError(`Image processed but metadata save failed: ${saveResult.error}`);
       }
 
       setRawImageUrl(raw);

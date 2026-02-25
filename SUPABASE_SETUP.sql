@@ -31,6 +31,14 @@ drop policy if exists "Wholesalers can insert own products" on public.products;
 drop policy if exists "Wholesalers can update own products" on public.products;
 drop policy if exists "Wholesalers can delete own products" on public.products;
 
+-- ── HOTFIX: allow RLS update on unclaimed rows ──────────────────
+-- The backend creates product rows via service role without setting wholesaler_id
+-- (it has no knowledge of the logged-in user). The frontend's saveProduct() then
+-- does an UPDATE to claim the row. If wholesaler_id is NULL the old policy
+-- evaluated auth.uid()=NULL → false → silently blocked every save.
+alter table if exists public.products
+  add column if not exists generated_image_urls text[] default '{}';
+
 -- Drop old profiles policies too (safe to recreate)
 drop policy if exists "Public profiles are viewable by everyone" on public.profiles;
 drop policy if exists "Users can insert their own profile"       on public.profiles;
@@ -92,9 +100,15 @@ create policy "Anyone can view products"
 create policy "Wholesalers can insert own products"
   on products for insert with check (auth.uid() = wholesaler_id);
 
--- Only the wholesaler who owns the product can update
+-- Only the wholesaler who owns the product can update.
+-- Also allows updating rows where wholesaler_id IS NULL — these are rows just
+-- created by the backend pipeline (no user context) waiting to be claimed by
+-- the authenticated wholesaler via saveProduct().
 create policy "Wholesalers can update own products"
-  on products for update using (auth.uid() = wholesaler_id);
+  on products for update using (
+    auth.uid() = wholesaler_id
+    OR wholesaler_id IS NULL
+  );
 
 -- Only the wholesaler who owns the product can delete
 create policy "Wholesalers can delete own products"
