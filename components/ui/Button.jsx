@@ -15,7 +15,6 @@ export function Button({
       "border-2 border-celestique-dark bg-transparent text-celestique-dark hover:bg-celestique-dark hover:text-celestique-cream hover:shadow-md",
     ghost: "hover:bg-celestique-taupe/20 text-celestique-dark",
   };
-
   return (
     <button
       type={type}

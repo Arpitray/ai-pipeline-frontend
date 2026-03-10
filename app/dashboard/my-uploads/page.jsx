@@ -14,7 +14,6 @@ export default async function MyUploadsPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/signin");
-
   const role = user.user_metadata?.role;
   if (!role) redirect("/select-role");
   if (role !== "wholesaler") redirect("/");

@@ -5,7 +5,6 @@ import { AddProductForm } from "../../../components/product/AddProductForm";
 import { SignOutButton } from "../../../components/auth/SignOutButton";
 
 export const metadata = { title: "Add Product — Celestique" };
-
 export default async function AddProductPage() {
   const supabase = await createClient();
   const {

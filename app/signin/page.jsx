@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { AuthLayout } from "../../components/auth/AuthLayout";
 import { SignInForm } from "../../components/auth/SignInForm";
 
@@ -12,7 +13,9 @@ export default function SignInPage() {
       subtitle="Enter your credentials to access your account."
       imageSrc="https://res.cloudinary.com/dsjjdnife/image/upload/v1771612613/101_k2qsju.png"
     >
-      <SignInForm />
+      <Suspense>
+        <SignInForm />
+      </Suspense>
     </AuthLayout>
   );
 }

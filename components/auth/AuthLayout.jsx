@@ -13,7 +13,6 @@ export function AuthLayout({ children, imageSrc, title, subtitle }) {
           priority
         />
       </div>
-
       {/* Right Side - Form */}
       <div className="flex w-full flex-col justify-center p-8 md:w-1/2 md:p-12 lg:p-16 bg-celestique-cream">
         <div className="mx-auto w-full max-w-md">

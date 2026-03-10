@@ -15,7 +15,6 @@ export const metadata = {
   title: "Celestique | Timeless Jewelry",
   description: "A celestial touch for timeless moments.",
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

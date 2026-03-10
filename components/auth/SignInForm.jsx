@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
@@ -8,7 +9,17 @@ import { GoogleButton } from "../ui/GoogleButton";
 import { signIn, signInWithGoogle } from "../../lib/actions/auth";
 
 export function SignInForm() {
-  const [error, setError] = useState(null);
+  const searchParams = useSearchParams();
+  const urlError = searchParams.get("error");
+  let decodedUrlError = null;
+  if (urlError) {
+    try {
+      decodedUrlError = decodeURIComponent(urlError);
+    } catch {
+      decodedUrlError = urlError;
+    }
+  }
+  const [error, setError] = useState(decodedUrlError);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {

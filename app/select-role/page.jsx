@@ -6,7 +6,6 @@ export const metadata = {
   title: "Choose Your Role — Celestique",
   description: "Tell us whether you're a wholesaler or a retailer to personalise your experience.",
 };
-
 export default async function SelectRolePage() {
   const supabase = await createClient();
   const {

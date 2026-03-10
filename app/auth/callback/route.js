@@ -3,13 +3,22 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url);
-  const code = searchParams.get("code");
+  const code  = searchParams.get("code");
+  // Supabase can return an error directly (e.g. access_denied, user cancelled)
+  const oauthError = searchParams.get("error");
+
+  if (oauthError) {
+    const description = searchParams.get("error_description") ?? oauthError;
+    const url = new URL(`${origin}/signin`);
+    url.searchParams.set("error", description);
+    return NextResponse.redirect(url.toString());
+  }
 
   if (code) {
     const supabase = await createClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
 
-    if (!error) {
+    if (!exchangeError) {
       // After exchanging the code, check the user's role
       const {
         data: { user },
@@ -38,8 +47,13 @@ export async function GET(request) {
       // No role yet (first Google sign-in) → pick a role
       return NextResponse.redirect(`${origin}/select-role`);
     }
+
+    // Exchange failed — pass the Supabase error message back
+    const url = new URL(`${origin}/signin`);
+    url.searchParams.set("error", exchangeError.message);
+    return NextResponse.redirect(url.toString());
   }
 
-  // On error, redirect to signin with error flag
+  // No code and no error — unexpected state
   return NextResponse.redirect(`${origin}/signin?error=oauth`);
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/Button";
+import { setUserRole } from "../../lib/actions/role";
 
 const roles = [
   {

@@ -23,7 +23,6 @@ export function Select({ id, label, options = [], value, onChange, placeholder =
     }
     setIsOpen(false);
   };
-
   const selectedOption = options.find((opt) => opt.value === value);
 
   return (
