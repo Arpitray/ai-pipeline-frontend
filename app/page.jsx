@@ -1,5 +1,5 @@
 import { getAllProducts } from "../lib/api/supabase-products";
-import { createClient } from "../lib/supabase/server";
+import { getAuthUser } from "../lib/supabase/queries";
 import { ProductCard } from "../components/product/ProductCard";
 import { SignOutButton } from "../components/auth/SignOutButton";
 import { Hero } from "../components/product/Hero";
@@ -13,10 +13,9 @@ export const metadata = {
 
 export const revalidate = 60;
 export default async function HomePage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // getAuthUser() is deduplicated by React.cache() — if layout already called it
+  // this request, no additional /user network call is made.
+  const user = await getAuthUser();
 
   // Hard gate: wholesalers must never see the retailer storefront.
   // Middleware handles it on first load; this catches any edge cases.

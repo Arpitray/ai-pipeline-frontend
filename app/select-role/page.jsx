@@ -1,4 +1,4 @@
-import { createClient } from "../../lib/supabase/server";
+import { getAuthUser } from "../../lib/supabase/queries";
 import { redirect } from "next/navigation";
 import { SelectRoleForm } from "../../components/auth/SelectRoleForm";
 
@@ -7,10 +7,9 @@ export const metadata = {
   description: "Tell us whether you're a wholesaler or a retailer to personalise your experience.",
 };
 export default async function SelectRolePage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // getAuthUser() is deduplicated by React.cache() — one /user call for the
+  // entire render, shared with the root layout.
+  const user = await getAuthUser();
 
   if (!user) redirect("/signin");
 

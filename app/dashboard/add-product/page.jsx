@@ -1,4 +1,4 @@
-import { createClient } from "../../../lib/supabase/server";
+import { getAuthUser } from "../../../lib/supabase/queries";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AddProductForm } from "../../../components/product/AddProductForm";
@@ -6,10 +6,9 @@ import { SignOutButton } from "../../../components/auth/SignOutButton";
 
 export const metadata = { title: "Add Product — Celestique" };
 export default async function AddProductPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // getAuthUser() is deduplicated by React.cache() — layout already called it,
+  // so this hits the cache, zero additional /user network calls.
+  const user = await getAuthUser();
 
   if (!user) redirect("/signin");
 
